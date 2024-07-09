@@ -1,10 +1,9 @@
 import { FC } from "react";
 import { ISearchBarProps } from "./types";
-
 import { InputSearch } from "./InputSearch";
 import { ButtonSearch } from "./ButtonSearch";
-import { SelectCategory } from "./SelectCategory/SelectCategory";
 import { TOptionCategory } from "./SelectCategory/types";
+import { SelectCategory } from "./SelectCategory/SelectCategory";
 
 export const SearchBar: FC<ISearchBarProps> = ({ }) => {
 
@@ -26,9 +25,7 @@ export const SearchBar: FC<ISearchBarProps> = ({ }) => {
         title: "Procesor",
         value: "procesor"
     }
-
     const options = [option1, option2, option3]
-
     return (
         <div
             className={`
@@ -47,7 +44,6 @@ export const SearchBar: FC<ISearchBarProps> = ({ }) => {
                 <ButtonSearch
                 />
             </div>
-
         </div>
     )
 }

@@ -16,9 +16,8 @@ export const SelectCategory: FC<ISelectCategoryProps> = ({
                 rounded-l-lg
                 cursor-pointer
                 bg-light-background dark:bg-dark-background
-                text-light-text dark:text-dark-text 
-                focus:outline-none focus:ring-1 focus:ring-light-secondary dark:focus:ring-dark-secondary
-                
+                text-light-acent dark:text-dark-acent
+                focus:outline-none focus:ring-1 focus:ring-light-secondary dark:focus:ring-dark-secondary                
             `}
         >
             {placeholder && <option value="" >{placeholder}</option>}
