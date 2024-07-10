@@ -1,9 +1,12 @@
+import { SingUp } from "@/ui/components/AuthForm/SingUp"
 
 const AuthPage = () => {
 
     return (
-        <main>
-            <h1>Este es el LOgin / Register</h1>
+        <main
+            className="w-screen h-full relative flex-col"
+        >            
+            <SingUp />
         </main>
     )
 }

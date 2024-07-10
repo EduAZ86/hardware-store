@@ -5,6 +5,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/ui/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/ui/theme/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   safelist: [
     {
@@ -35,7 +36,7 @@ const config: Config = {
           'secondary': '#D46779',
           'background': '#222831',
           'acent': '#C6C6C6',
-          'text': '#FFFFFF',
+          'text': '#0A0C0C',
           'error': '#F44336'
         },
         dark: {

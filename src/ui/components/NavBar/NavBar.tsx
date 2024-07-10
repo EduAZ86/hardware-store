@@ -11,7 +11,8 @@ export const NavBar: FC<INavBarProps> = ({
         relative flex flex-row justify-center items-center
         bg-gradient-to-r from-light-primary to-light-secondary
         dark:bg-gradient-to-r dark:from-dark-primary dark:to-dark-secondary 
-        w-full h-20 
+        w-full h-20
+        gap-2 
         `}>
             <SearchBar />
             <ThemeSwitcher/>
