@@ -1,14 +1,14 @@
 import { InputHTMLAttributes } from "react";
+import { FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
 
 export interface IInputAuthProps extends Pick<InputHTMLAttributes<HTMLInputElement>,
-    | "onChange"
-    | "value"
     | "name"
     | "id"
     | "placeholder"
-    | "title"
     | "type"
 > {
+    register: UseFormRegister;
     label: string;
     disabled: boolean;
+    watch: UseFormWatch<FieldValues>;
 }

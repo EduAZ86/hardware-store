@@ -7,7 +7,7 @@ export const Title: FC<ITitleProps> = ({
     return (
         <h2
             className={`
-                text-3xl px-4 py-3
+                text-3xl px-3 py-2
                 text-light-text dark:text-dark-text
                 tracking-normal font-normal
             `}
