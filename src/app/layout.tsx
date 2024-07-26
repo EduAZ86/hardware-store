@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { NavBar } from "@/ui";
+import type { Metadata } from "next";
+import { Providers } from "./Providers";
+import { Montserrat } from "next/font/google";
 
-import { AuthProvider } from "./SessionProvider";
-import ThemeColorProvider from "@/ui/theme/ThemeProvider";
 
 const montserrat = Montserrat({ subsets: ["latin"] })
 
@@ -21,12 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <ThemeColorProvider>
-          <AuthProvider>
-            <NavBar />
-            {children}
-          </AuthProvider>
-        </ThemeColorProvider>
+        <Providers>
+          <NavBar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -11,7 +11,12 @@ export const SingLink: FC<ISingProps> = ({
         <span
             className="text-light-text dark:text-dark-text text-center text-xs"
         >
-            {text} <Link className="text-light-background dark:text-dark-background font-semibold" href={href} >{linkText}</Link>
+            {text} <Link className={
+                `text-light-background dark:text-dark-background font-semibold
+                
+                hover:text`
+                
+                } href={href} >{linkText}</Link>
         </span>
     )
 }

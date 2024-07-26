@@ -3,8 +3,11 @@ import { IInputAuthProps } from "./types";
 
 export const InputAuth: FC<IInputAuthProps> = ({
     label,
+    name,
     disabled,
     register,
+    requiredMessage,
+    errors,
     ...otherInputProps
 }) => {
     return (
@@ -24,6 +27,11 @@ export const InputAuth: FC<IInputAuthProps> = ({
                 {label}
             </label>
             <input
+                {...register(name,
+                    {
+                        required: requiredMessage !== undefined,
+                        message: requiredMessage
+                    })}
                 {...otherInputProps}
                 className={`
                     w-full h-12 rounded-md
@@ -35,7 +43,7 @@ export const InputAuth: FC<IInputAuthProps> = ({
                     focus:ring-light-secondary dark:focus:ring-dark-secondary
                     `}
             />
-
+            <span className="text-light-error text-xs dark:text-dark-error">{errors[name]?.message}</span>
         </div>
     )
 }

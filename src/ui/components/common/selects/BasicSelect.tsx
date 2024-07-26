@@ -16,7 +16,7 @@ export const BasicSelect: FC<IBasicSelectProps> = ({
             rounded-l-lg
             cursor-pointer
             bg-light-background dark:bg-dark-background
-            text-light-text dark:text-dark-text  focus:outline-none
+            text-light-text dark:text-dark-text  
             focus:ring-1 focus:ring-light-secondary dark:focus:ring-dark-secondary
             `}
         >

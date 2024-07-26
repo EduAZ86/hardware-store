@@ -8,17 +8,35 @@ import { useForm } from "react-hook-form";
 import { AuthForm } from "./AuthForm";
 import { SingLink } from "./SingLink";
 import { signIn, useSession } from "next-auth/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { validationUserSchema } from "./validationUserSchema";
+import { INewUser } from "@/types/user.types";
+import { userRegister } from "@/lib/fetching/fechUsers";
 
 export const SingUp: FC<ISingUpProps> = () => {
 
-    const { handleSubmit, register, reset, watch } = useForm()
+    const { handleSubmit, register, reset, formState: { errors } } = useForm(
+        {
+            resolver: zodResolver(validationUserSchema)
+        }
+    )
+    const onSubmit = handleSubmit(async (data) => {
+        const newUser: INewUser = {
+            email: data.email,
+            password: data.password,
+            username: data.user,
+            role: "user"
+        };
+        await userRegister(newUser);
 
-    const { data: session } = useSession()
-
-    const onSubmit = handleSubmit((data) => {
-
+        signIn("credentials", {
+            email: data.email,
+            password: data.password,
+            user: data.user,
+            callbackUrl: "/",
+        });
+        reset();
     })
-
     return (
         <div
             className={`
@@ -29,6 +47,8 @@ export const SingUp: FC<ISingUpProps> = () => {
         >
             <Title text="Register" />
             <AuthForm
+                title="register"
+                name="register"
                 onSubmit={onSubmit}
             >
                 <BackgroundColor backgroundColor="acent" />
@@ -41,7 +61,9 @@ export const SingUp: FC<ISingUpProps> = () => {
                     placeholder="user@example.com"
                     type="email"
                     register={register}
-                    watch={watch}
+
+                    errors={errors}
+                    requiredMessage="Email is required"
                 />
                 <InputAuth
                     key={"password"}
@@ -49,11 +71,12 @@ export const SingUp: FC<ISingUpProps> = () => {
                     label="Password"
                     id="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="********"
                     type="password"
                     register={register}
-                    watch={watch}
 
+                    errors={errors}
+                    requiredMessage="Password is required"
                 />
                 <InputAuth
                     key={"username"}
@@ -64,7 +87,9 @@ export const SingUp: FC<ISingUpProps> = () => {
                     placeholder="user"
                     type="text"
                     register={register}
-                    watch={watch}
+
+                    errors={errors}
+                    requiredMessage="User name is required"
                 />
                 <ButtonWithText
                     buttonSize="full"
@@ -73,21 +98,9 @@ export const SingUp: FC<ISingUpProps> = () => {
                     type="submit"
                 />
                 <SingLink
-                    href="/singIn"
+                    href="/auth/login"
                     linkText="Sing In"
                     text="Already have an account?"
-                />
-                <span className=" text-center relative flex flex-row items-center justify-center gap-2 w-full">
-                    <span className="border-solid border-b-[1px] w-full h-1/2 border-light-text dark:border-dark-text" />
-                    or
-                    <span className="border-solid border-b-[1px] w-full h-1/2 border-light-text dark:border-dark-text" />
-                </span>
-                <ButtonWithText
-                    buttonSize="full"
-                    buttonVariant="transparent"
-                    textButton="Google"
-                    type="button"
-                    onClick={() => signIn()}
                 />
             </AuthForm>
         </div>

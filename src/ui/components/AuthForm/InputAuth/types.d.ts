@@ -1,6 +1,7 @@
 import { InputHTMLAttributes } from "react";
 import { FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
 
+
 export interface IInputAuthProps extends Pick<InputHTMLAttributes<HTMLInputElement>,
     | "name"
     | "id"
@@ -10,5 +11,6 @@ export interface IInputAuthProps extends Pick<InputHTMLAttributes<HTMLInputEleme
     register: UseFormRegister;
     label: string;
     disabled: boolean;
-    watch: UseFormWatch<FieldValues>;
+    requiredMessage?: string;
+    errors: FieldErrors<FieldValues>
 }
