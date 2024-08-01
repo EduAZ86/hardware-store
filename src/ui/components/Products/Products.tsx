@@ -2,7 +2,7 @@ import { FC } from "react";
 import { IProductsProps } from "./types";
 import { CardControlPanel } from "./CardControlPanel/CardControlPanel";
 import { ProductList } from "./ProductList/ProductList";
-import { DataProductCard } from "@/types/dataTypes";
+import { DataProductCard } from "@/types/data.types";
 import { Title } from "../common";
 
 export const Products: FC<IProductsProps> = ({ }) => {

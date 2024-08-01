@@ -49,6 +49,7 @@ export const CardControlPanel: FC<ICardControlPanelProps> = ({ }) => {
                 relative
                 z-0
                 flex flex-row
+                flex-wrap
                 items-center
                 justify-around
                 border-solid border-b-[1px] border-light-primary dark:border-dark-primary
@@ -81,7 +82,7 @@ export const CardControlPanel: FC<ICardControlPanelProps> = ({ }) => {
                     key={"byDiscount"}
                 />
                 <div
-                    className={`w-fit flex flex-row justify-center items-center gap-4 px-2`}
+                    className={`w-fit hidden md:flex flex-row justify-center items-center gap-4 px-2`}
                 >
                     <TypeCardButton
                         key="verticalCard"

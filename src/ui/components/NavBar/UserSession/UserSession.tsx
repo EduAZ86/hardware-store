@@ -12,13 +12,14 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
 
     return (
         <div
-            className={`
-                    w-40 
-                    display flex flex-row gap-2
+            className={`                    
+                    md:w-40 w-20
+                    h-full
+                    display flex flex-row-reverse gap-2
                     relative
-                    justify-center items-center
+                    justify-center items-start
                     z-10
-                           
+                    group       
                 `}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -27,7 +28,7 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
                 className={`
                     md:flex hidden flex-col
                     justify-around items-center
-
+                    
                     `}
             >
                 <Category
@@ -40,18 +41,18 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
                     group-hover:text-light-primary group-hover:dark:text-dark-primary
                     `}
                 >
-                    {user?.name}
+                    {user?.username}
                 </h4>
             </div>
             <img
-                src={user?.image || defaultImage}
+                src={user?.picture || defaultImage}
                 alt="user-image"
                 className={`
                     w-8 h-8 rounded-full
                     object-cover
                     border-2 border-light-acent dark:border-dark-acent
                     cursor-pointer 
-                    hover: duration-300 hover:border-light-primary dark:hover:border-dark-primary               
+                    hover: duration-300 group-hover:border-light-primary dark:group-hover:border-dark-primary               
                 `}
             />
             <DropDownMenu
@@ -60,12 +61,11 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
                 backgroundColor="primary"
             >
                 <ul className="flex flex-col gap-2">
-                    <ListLI key="user"><Link href={`/user/${user?.name}`}>configuration</Link></ListLI>
+                    <ListLI key="user"><Link href={`/user/${user?.username}`}>configuration</Link></ListLI>
                     <ListLI key="Logout"><button onClick={() => signOut()}>logout</button></ListLI>
                     <ListLI key="theme">theme: <ThemeSwitcher /></ListLI>
                 </ul>
             </DropDownMenu>
-
         </div>
     )
 }

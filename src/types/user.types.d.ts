@@ -1,4 +1,5 @@
 import { Date, Document } from 'mongoose';
+import { User } from 'next-auth';
 
 type Role = "admin" | "user"
 
@@ -21,6 +22,10 @@ export interface IUser {
     updatedAt?: Date;
 }
 
-export interface IUserDataBaseResponse extends IUser {
-    _id: string;    
+export interface IUserDataBaseResponse extends Omit<IUser,"password"> {
+    id: string;    
+}
+
+export interface IUserSession extends User {
+    _doc: IUserDataBaseResponse
 }

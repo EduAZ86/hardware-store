@@ -1,5 +1,5 @@
-import { IUserToken } from "@/app/api/auth/[...nextauth]/userToken.interface";
+import { IUserDataBaseResponse } from "@/types/user.types";
 
 export interface IUserSessionProps {
-    user: IUserToken;
+    user: IUserDataBaseResponse;
 }

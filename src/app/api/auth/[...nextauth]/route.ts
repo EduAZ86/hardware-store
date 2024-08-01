@@ -1,14 +1,13 @@
 import NextAuth from "next-auth/next";
-import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { checkUser, loginUser, registerUser } from "@/services/auth/authServices";
 import connectDB from "@/lib/db/db";
+import { randomPassword } from "@/utils/randomPassword";
+import GoogleProvider from "next-auth/providers/google";
 import { ErrorLog } from "@/services/error/errorLog.class";
 import { errorLogSave } from "@/services/error/errorLogService";
-import { IUserToken } from "./userToken.interface";
-import { INewUser } from "@/types/user.types";
-import { randomPassword } from "@/utils/randomPassword";
-import { User } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { INewUser, IUserDataBaseResponse } from "@/types/user.types";
+import { checkUser, getUser, loginUser, registerUser } from "@/services/auth/authServices";
+
 
 const handler = NextAuth({
     providers: [
@@ -28,15 +27,18 @@ const handler = NextAuth({
                     if (!user) {
                         throw new ErrorLog("User not found", 'error', 'authorize', undefined, '/login');
                     }
-                    console.log("user retornado del login", user);
-                    
-                    return {
+
+                    const response: IUserDataBaseResponse = {
                         id: user._id.toString(),
-                        name: user.username,
+                        username: user.username,
                         email: user.email,
-                        image: user.picture
-                        
-                    } as User;
+                        picture: user.picture,
+                        role: user.role,
+                        favoriteProducts: user.favoriteProducts,
+                        createdAt: user.createdAt,
+                        updatedAt: user.updatedAt
+                    }
+                    return response
                 } catch (error: any) {
                     await errorLogSave(error)
                     return null;
@@ -69,20 +71,19 @@ const handler = NextAuth({
                             password: randomPassword(10),
                             role: "user",
                             picture: user.image
-                        };       
+                        };
                         await registerUser(newUser);
                     }
+                    const completeUser = await getUser(user.email);
+                    token.user = { ...user, ...completeUser };
                 }
             } catch (error: any) {
                 await errorLogSave(error);
             }
-            if (user) {
-                token.user = user;
-            }
             return token;
         },
         async session({ session, token }) {
-            session.user = token.user as IUserToken;
+            session.user = token.user as IUserDataBaseResponse;
             return session
         }
     }

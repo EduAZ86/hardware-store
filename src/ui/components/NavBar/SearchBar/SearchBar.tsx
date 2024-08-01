@@ -29,7 +29,13 @@ export const SearchBar: FC<ISearchBarProps> = ({ }) => {
     return (
         <div
             className={`
-            w-2/3 md:h-10 h-30 flex md:flex-row flex-col relative md:gap-0 gap-y-2
+                md:w-2/3 w-1/2 
+                md:h-10 h-30 
+                flex 
+                md:flex-row flex-col 
+                relative 
+                gap-0 md:gap-y-2
+                md:rounded-none rounded-lg overflow-hidden
             `}
         >
             <SelectCategory
@@ -38,7 +44,7 @@ export const SearchBar: FC<ISearchBarProps> = ({ }) => {
                 title="all categories"
             />
             <div
-                className="flex flex-row w-full"
+                className="flex flex-row w-full h-8 md:h-10"
             >
                 <InputSearch />
                 <ButtonSearch

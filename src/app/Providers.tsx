@@ -1,19 +1,19 @@
 "use client"
-import ThemeColorProvider from "@/ui/theme/ThemeProvider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
+import { SessionProvider } from "next-auth/react";
+import DarkModeProvider from "@/ui/theme/themeProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient()
 
 export const Providers = ({ children }: { children: ReactNode }) => {
     return (
         <QueryClientProvider client={queryClient} >
-            <ThemeColorProvider>
+            <DarkModeProvider>
                 <SessionProvider>
                     {children}
                 </SessionProvider>
-            </ThemeColorProvider>
+            </DarkModeProvider>
         </QueryClientProvider>
     )
 }

@@ -1,5 +1,5 @@
 export interface DataProductCard {
-    id: string;
+    _id: string;
     image: string;
     category: string;
     title: string,

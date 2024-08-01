@@ -12,8 +12,10 @@ export const SelectCategory: FC<ISelectCategoryProps> = ({
         <select
             title={title}
             className={`
-                w-fit px-4
-                rounded-l-lg
+                md:w-fit w-full 
+                px-4
+                md:h-10 h-8
+                md:rounded-l-lg rounded-none
                 cursor-pointer
                 bg-light-background dark:bg-dark-background
                 text-light-acent dark:text-dark-acent

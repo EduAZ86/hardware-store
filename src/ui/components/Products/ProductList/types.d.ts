@@ -1,4 +1,4 @@
-import { DataProductCard } from "@/types/dataTypes";
+import { DataProductCard } from "@/types/data.types";
 
 export interface IListProductProps {
     products: DataProductCard[];

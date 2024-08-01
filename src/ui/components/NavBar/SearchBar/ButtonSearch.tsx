@@ -16,7 +16,7 @@ export const ButtonSearch: FC<ISearchButtonProps> = ({
                 group 
                 text-md justify-center
                  items-center 
-                 rounded-r-lg
+                 md:rounded-r-lg rounded-none
                 
                 active:scale-95 z-0 overflow-hidden duration-300`
             }
