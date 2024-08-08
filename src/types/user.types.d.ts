@@ -22,10 +22,21 @@ export interface IUser {
     updatedAt?: Date;
 }
 
-export interface IUserDataBaseResponse extends Omit<IUser,"password"> {
-    id: string;    
+export interface IUserResponse extends Omit<IUser, "password"> {
+    _id: string;
 }
 
-export interface IUserSession extends User {
-    _doc: IUserDataBaseResponse
+export interface IUserSession {
+    id: string;
+    name: string;
+    email: string;
+    image?: string;
+    userData: IUserResponse;
+    token: string;
 }
+
+
+
+// export interface IUserSession extends User {
+//     _doc: IUserDataBaseResponse
+// }

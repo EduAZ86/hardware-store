@@ -4,7 +4,7 @@ import { IProduct } from "./product.types";
 type TCartStatus = 'active' | 'completed' | 'cancelled';
 
 export interface ICartItem {
-    product: string;
+    productID: string;
     quantity: number;
     subTotalPrice: number;
 }

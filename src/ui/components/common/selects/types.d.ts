@@ -1,7 +1,8 @@
 import { OptionHTMLAttributes, SelectHTMLAttributes } from "react";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 
-type TOption = {
+export type TOption = {
     value: string,
     label: string;
     id: string;
@@ -17,6 +18,9 @@ export interface IBasicSelectProps extends Pick<SelectHTMLAttributes<HTMLSelectE
 > {
     options: TOption[];
     placeholder: string;
+    register?: UseFormRegister;
+    requiredMessage?: string;
+    errors?: FieldErrors<FieldValues>
 }
 
 export interface IBasicOption extends Pick<OptionHTMLAttributes<HTMLOptionElement>,

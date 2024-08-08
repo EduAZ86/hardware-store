@@ -2,10 +2,16 @@ import connectDB from "@/lib/db/db"
 import { getCartByUserID, postNewCart } from "@/services/cart/cart.services";
 import { errorLogSave } from "@/services/error/errorLogService"
 import { NextRequest, NextResponse } from "next/server"
+import { getToken } from "next-auth/jwt";
 
 export const GET = async (req: NextRequest) => {
     try {
         await connectDB();
+
+        const token = await getToken({ req });
+        console.log("token", token);
+
+
         const userID = req.nextUrl.searchParams.get('userID');
         if (!userID) {
             throw new Error('userID is required');

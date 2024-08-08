@@ -74,7 +74,6 @@ export const SingUp: FC<ISingUpProps> = () => {
                     placeholder="********"
                     type="password"
                     register={register}
-
                     errors={errors}
                     requiredMessage="Password is required"
                 />

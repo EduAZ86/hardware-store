@@ -42,6 +42,7 @@ export const SearchBar: FC<ISearchBarProps> = ({ }) => {
                 options={options}
                 placeholder="All categories"
                 title="all categories"
+                
             />
             <div
                 className="flex flex-row w-full h-8 md:h-10"

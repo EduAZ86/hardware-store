@@ -1,13 +1,14 @@
 import CartModel from "@/models/cart";
 import { ICart } from "@/types/cart.types";
 import mongoose from "mongoose";
-import CartSchema from "./validation.schema";
-import CartPartialSchema from "./updateValidation.schema";
+import { CartPartialSchema, CartSchema } from "./validation.schema";
+
+
 
 export const getCartByUserID = async (userID: string) => {
     try {
         const userObjectID = new mongoose.Types.ObjectId(userID);
-        const cart = await CartModel.findOne({ userID: userObjectID }).populate('items.product').exec();
+        const cart = await CartModel.findOne({ userID: userObjectID }).lean().populate('items.product').exec();
         return cart
     } catch (error) {
         throw new Error('Error retrieving cart');

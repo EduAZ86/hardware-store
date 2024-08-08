@@ -9,7 +9,7 @@ const CartItemSchema = z.object({
     subTotalPrice: z.number().min(0)
 })
 
-const CartSchema = z.object({
+export const CartSchema = z.object({
     userID: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {
         message: "Invalid userID format",
     }),
@@ -19,4 +19,23 @@ const CartSchema = z.object({
     status: z.enum(['active', 'completed', 'cancelled'])
 })
 
-export default CartSchema
+
+const CartPartialItemSchema = z.object({
+    productID: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {
+        message: "Invalid productID format",
+    }).optional(),
+    quantity: z.number().positive().optional(),
+    subTotalPrice: z.number().nonnegative().optional(),
+});
+
+export const CartPartialSchema = z.object({
+    userID: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {
+        message: "Invalid userID format",
+    }).optional(),
+    items: z.array(CartPartialItemSchema).min(1, "Cart must have at least one item").optional(),
+    totalPrice: z.number().nonnegative().optional(),
+    totalQuantity: z.number().positive().optional(),
+    status: z.enum(['active', 'completed', 'cancelled']).optional(),
+});
+
+

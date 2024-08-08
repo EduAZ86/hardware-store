@@ -13,21 +13,20 @@ import { Kart } from "./Kart/Kart";
 export const NavBar: FC<INavBarProps> = ({
 }) => {
     const { data: session, status } = useSession()
-    const sessionUser = session?.user as IUserSession
-    const user = sessionUser?._doc
-    console.log(user);
+    const sessionUser = session?.user
+    const user = sessionUser?.userData
 
     return (
         <div className={`
-        relative flex 
-        flex-row 
+        relative flex
+        flex-row
         md:justify-around justify-start
         md:px-0 px-2
         items-center
         bg-gradient-to-r from-light-primary to-light-secondary
-        dark:bg-gradient-to-r dark:from-dark-primary dark:to-dark-secondary 
+        dark:bg-gradient-to-r dark:from-dark-primary dark:to-dark-secondary
         w-full h-20
-        gap-2 
+        gap-2
         `}>
             <SearchBar />
             {status === "authenticated" &&

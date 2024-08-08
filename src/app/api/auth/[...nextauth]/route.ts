@@ -5,11 +5,12 @@ import GoogleProvider from "next-auth/providers/google";
 import { ErrorLog } from "@/services/error/errorLog.class";
 import { errorLogSave } from "@/services/error/errorLogService";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { INewUser, IUserDataBaseResponse } from "@/types/user.types";
+import { INewUser, IUserResponse, IUserSession } from "@/types/user.types";
 import { checkUser, getUser, loginUser, registerUser } from "@/services/auth/authServices";
+import { AuthOptions } from "next-auth";
 
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -28,15 +29,14 @@ const handler = NextAuth({
                         throw new ErrorLog("User not found", 'error', 'authorize', undefined, '/login');
                     }
 
-                    const response: IUserDataBaseResponse = {
+                    const response: IUserSession = {
                         id: user._id.toString(),
-                        username: user.username,
+                        name: user.username,
                         email: user.email,
-                        picture: user.picture,
-                        role: user.role,
-                        favoriteProducts: user.favoriteProducts,
-                        createdAt: user.createdAt,
-                        updatedAt: user.updatedAt
+                        image: user.picture,
+                        userData: user,
+                        token: "token"
+
                     }
                     return response
                 } catch (error: any) {
@@ -74,8 +74,14 @@ const handler = NextAuth({
                         };
                         await registerUser(newUser);
                     }
-                    const completeUser = await getUser(user.email);
-                    token.user = { ...user, ...completeUser };
+                    const completeUser: IUserResponse = await getUser(user.email);
+                    token.user = {
+                        ...user,
+                        ...token,
+                        userData: completeUser
+                    };
+                    console.log("token", token);
+
                 }
             } catch (error: any) {
                 await errorLogSave(error);
@@ -83,7 +89,11 @@ const handler = NextAuth({
             return token;
         },
         async session({ session, token }) {
-            session.user = token.user as IUserDataBaseResponse;
+            session.user = {
+                ...token.user as Omit<IUserSession, 'token'>,
+                token: token.jti as string,
+            };
+
             return session
         }
     }
@@ -96,6 +106,8 @@ const handler = NextAuth({
         strategy: "jwt"
     },
     debug: process.env.NODE_ENV === 'development'
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

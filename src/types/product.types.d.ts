@@ -1,21 +1,25 @@
 import { Date } from "mongoose";
-type TCategory =
-    | 'laptop'
-    | 'processor'
-    | 'graphics'
-    | 'memory'
-    | 'storage'
-    | 'motherboard'
-    | 'power supply'
-    | 'case'
-    | 'monitor'
-    | 'keyboard'
-    | 'mouse'
-    | 'headset'
-    | 'speaker'
-    | 'casing'
-    | 'fan'
-    | 'other';
+export enum ECategory {
+    Laptop = 'laptop',
+    Processor = 'processor',
+    Graphics = 'graphics',
+    Memory = 'memory',
+    Storage = 'storage',
+    Motherboard = 'motherboard',
+    PowerSupply = 'power supply',
+    Case = 'case',
+    Monitor = 'monitor',
+    Keyboard = 'keyboard',
+    Mouse = 'mouse',
+    Headset = 'headset',
+    Speaker = 'speaker',
+    Casing = 'casing',
+    Fan = 'fan',
+    Other = 'other'
+}
+
+export type TCategory = keyof typeof ECategory
+
 type TPrice = {
     price: number;
     percentageDiscount: number;
