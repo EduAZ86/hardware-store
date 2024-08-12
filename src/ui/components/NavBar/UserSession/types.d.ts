@@ -1,5 +1,5 @@
-import { IUserDataBaseResponse } from "@/types/user.types";
+import { IUserResponse } from "@/types/user.types";
 
 export interface IUserSessionProps {
-    user: IUserDataBaseResponse;
+    user?: IUserResponse;
 }

@@ -1,6 +1,6 @@
 
 import { ECategory, } from "@/types/product.types.d";
-import { TOption } from "../common/selects/types";
+import { TOption } from "../common/selects/Select/types";
 
 export const productCategories: ECategory[] = Object.values(ECategory)
 

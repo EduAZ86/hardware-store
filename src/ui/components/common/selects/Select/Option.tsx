@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { IBasicOption } from "./types";
+import { IOptionProps } from "./types";
 
-export const BasicOption: FC<IBasicOption> = ({
+export const Option: FC<IOptionProps> = ({
     label,
     ...optionProps
 }) => {

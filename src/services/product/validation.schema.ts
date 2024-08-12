@@ -2,8 +2,6 @@
 import { ECategory } from '@/types/product.types.d';
 import { z } from 'zod';
 
-
-// Esquema para TPrice
 const priceSchema = z.object({
     price: z.number(),
     percentageDiscount: z.number(),
@@ -16,7 +14,6 @@ const priceSchemaOptional = z.object({
     descriptionDiscount: z.string().optional()
 });
 
-// Esquema para TDimensions
 const dimensionsSchema = z.object({
     length: z.number().optional(),
     width: z.number().optional(),
@@ -24,7 +21,6 @@ const dimensionsSchema = z.object({
     weight: z.number().optional()
 });
 
-// Esquema para IProduct
 export const ProductSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
     description: z.string().min(1, { message: "Description is required" }),

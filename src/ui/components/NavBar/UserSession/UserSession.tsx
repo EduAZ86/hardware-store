@@ -61,6 +61,7 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
                 backgroundColor="primary"
             >
                 <ul className="flex flex-col gap-2">
+                    {user?.role === "admin" && <ListLI key="addProduct"><Link href={`/newproduct`}>new product</Link></ListLI>}
                     <ListLI key="user"><Link href={`/user/${user?.username}`}>configuration</Link></ListLI>
                     <ListLI key="Logout"><button onClick={() => signOut()}>logout</button></ListLI>
                     <ListLI key="theme">theme: <ThemeSwitcher /></ListLI>

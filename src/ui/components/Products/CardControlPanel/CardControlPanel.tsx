@@ -3,9 +3,10 @@ import { FC } from "react";
 import { ICardControlPanelProps } from "./types";
 import { TypeCardButton } from "./TypeCardButton";
 import { PaginationIndex } from "./PaginationIndex";
-import { TOption } from "../../common/selects/types";
-import { BasicSelect } from "../../common/selects/BasicSelect";
+import { TOption } from "../../common/selects/Select/types";
+
 import { faBars, faThLarge, } from "@fortawesome/free-solid-svg-icons";
+import { BasicSelect } from "../../common";
 
 
 export const CardControlPanel: FC<ICardControlPanelProps> = ({ }) => {

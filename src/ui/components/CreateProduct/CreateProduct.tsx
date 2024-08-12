@@ -5,7 +5,7 @@ import { BasicForm } from "../common/forms";
 import { InputField } from "../common/Inputs/InputField";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { BasicSelect } from "../common/selects/BasicSelect";
+import { Select } from "../common/selects/Select/Select";
 import { categoryOptions } from "./constants";
 import { ImageLoader } from "./ImageLoader";
 import { validationSchema } from "./validationSchema";
@@ -14,10 +14,6 @@ import { DimensionProductInputs } from "./DimensionProductInputs";
 
 
 export const CreateProduct: FC = () => {
-
-
-
-
 
     const { handleSubmit, register, reset, formState: { errors }, watch } = useForm(
         {
@@ -47,7 +43,9 @@ export const CreateProduct: FC = () => {
                 <div
                     className={`
                         w-full
-                        grid grid-cols-1 sm:grid-cols-2 justify-items-center
+                        grid
+                        grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+                        justify-items-center
                         gap-4
                     `}
                 >
@@ -63,7 +61,7 @@ export const CreateProduct: FC = () => {
                         errors={errors}
                         requiredMessage="Product name is required"
                     />
-                    <BasicSelect
+                    <Select
                         key={"Category"}
                         title={"Category"}
                         name="category"

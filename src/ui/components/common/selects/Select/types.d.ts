@@ -1,5 +1,7 @@
 import { OptionHTMLAttributes, SelectHTMLAttributes } from "react";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldErrors, FieldValues } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
+
 
 
 export type TOption = {
@@ -10,20 +12,20 @@ export type TOption = {
 }
 
 
-export interface IBasicSelectProps extends Pick<SelectHTMLAttributes<HTMLSelectElement>,
+export interface ISelectProps extends Pick<SelectHTMLAttributes<HTMLSelectElement>,
     | "title"
-    | "name"
     | "onChange"
     | "value"
 > {
     options: TOption[];
     placeholder: string;
-    register?: UseFormRegister;
     requiredMessage?: string;
+    register: UseFormRegister<FieldValues>;  
     errors?: FieldErrors<FieldValues>
+    name: string;
 }
 
-export interface IBasicOption extends Pick<OptionHTMLAttributes<HTMLOptionElement>,
+export interface IOptionProps extends Pick<OptionHTMLAttributes<HTMLOptionElement>,
     | "value"
     | "disabled"
 > {

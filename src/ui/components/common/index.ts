@@ -6,4 +6,5 @@ export * from "./buttons";
 export * from "./Containers";
 export * from "./forms";
 export * from "./Inputs";
+export * from "./selects";
 export { PageContainer } from "./Containers/PageContainer";

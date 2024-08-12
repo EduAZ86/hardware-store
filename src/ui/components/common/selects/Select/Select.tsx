@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { IBasicSelectProps } from "./types";
-import { BasicOption } from "./BasicOption";
+import { ISelectProps } from "./types";
+import { Option } from "./Option";
 
-export const BasicSelect: FC<IBasicSelectProps> = ({
+export const Select: FC<ISelectProps> = ({
     options,
     placeholder,
     register,
@@ -12,6 +12,7 @@ export const BasicSelect: FC<IBasicSelectProps> = ({
     ...otherSelectProps
 
 }) => {
+    const name = otherSelectProps.name
     return (
         <div
             className={`
@@ -32,26 +33,24 @@ export const BasicSelect: FC<IBasicSelectProps> = ({
 
 
             <select
+                {...register(name)}
                 {...otherSelectProps}
-                {...register(otherSelectProps?.name?.toString(), {
-                    required: requiredMessage !== undefined,
-                })}
                 className={`
-            w-full h-12
-            px-1
-            md:px-2            
-            rounded-lg
-            cursor-pointer
-            bg-light-background dark:bg-dark-background
-            text-light-text dark:text-dark-text  
-            focus:ring-1 focus:ring-light-secondary dark:focus:ring-dark-secondary
-            text-sm
+                w-full h-12
+                px-1
+                md:px-2            
+                rounded-lg
+                cursor-pointer
+                bg-light-background dark:bg-dark-background
+                text-light-text dark:text-dark-text  
+                focus:ring-1 focus:ring-light-secondary dark:focus:ring-dark-secondary
+                text-sm
             `}
             >
                 {placeholder && <option value="" >{placeholder}</option>}
                 {options?.map((option, index) => {
                     return (
-                        <BasicOption
+                        <Option
                             key={`basic-select-option-${index}`}
                             {...option}
                         />
