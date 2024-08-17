@@ -10,10 +10,14 @@ import { categoryOptions } from "./constants";
 import { ImageLoader } from "./ImageLoader";
 import { validationSchema } from "./validationSchema";
 import { DimensionProductInputs } from "./DimensionProductInputs";
+import { useDataProducts } from "@/hooks/products/useDataProducts";
+import { IProduct } from "@/types/product.types";
 
 
 
 export const CreateProduct: FC = () => {
+
+    const { mutate: createProduct } = useDataProducts().useCreateProduct()
 
     const { handleSubmit, register, reset, formState: { errors }, watch } = useForm(
         {
@@ -21,8 +25,34 @@ export const CreateProduct: FC = () => {
         }
     )
     const onSubmit = handleSubmit(async (data) => {
+        const newProduct: IProduct = {
+            name: data.name,
+            category: data.category,
+            description: data.description,
+            brand: data.brand,
+            price: {
+                descriptionDiscount: data.descriptionDiscount,
+                percentageDiscount: data.percentageDiscount,
+                price: data.price
+            },
+            dimensions: {
+                length: data.length,
+                width: data.width,
+                height: data.height,
+                weight: data.weight
+            },
+            images: [data["image-1"], data["image-2"], data["image-3"], data["image-4"], data["image-5"]],
+            modelProduct: data.modelProduct,
+            releaseDate: data.releaseDate,
+            sku: data.sku,
+            averageRating: data.averageRating,
+            warranty: data.warranty,
+            manufacturer: data.manufacturer,
+            stock: data.stock
+        }
         console.log(data)
 
+        await createProduct(newProduct)
     })
 
     return (
@@ -120,6 +150,29 @@ export const CreateProduct: FC = () => {
                         register={register}
                         errors={errors}
                         requiredMessage="Product price is required"
+                    />
+                    <InputField
+                        key={"percentage discount"}
+                        label={"Percentage discount"}
+                        disabled={false}
+                        id="descriptionDiscount"
+                        name="descriptionDiscount"
+                        placeholder="percentage discount of the product"
+                        type="number"
+                        register={register}
+                        errors={errors}
+                        requiredMessage="Product percentage discount is required"
+                    />
+                    <InputField
+                        key={"description discount"}
+                        label={"Description discount"}
+                        disabled={false}
+                        id="descriptionDiscount"
+                        name="descriptionDiscount"
+                        placeholder="description discount of the product"
+                        type="text"
+                        register={register}
+                        errors={errors}
                     />
                     <InputField
                         key={"stock"}

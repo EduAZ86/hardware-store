@@ -1,15 +1,17 @@
+"use client"
 import { FC } from "react";
 import { IProductsProps } from "./types";
 import { CardControlPanel } from "./CardControlPanel/CardControlPanel";
 import { ProductList } from "./ProductList/ProductList";
 import { DataProductCard } from "@/types/data.types";
 import { Title } from "../common";
+import { useDataProducts } from "@/hooks/products/useDataProducts";
 
 export const Products: FC<IProductsProps> = ({ }) => {
 
     const productsData: DataProductCard[] = [
         {
-            id: "asdagtasaar3435",
+            _id: "asdagtasaar3435",
             title: "Nvidia RTX 3060s Asus Tuff Gaming",
             category: "Graphic Card",
             discount: 0.15,
@@ -17,7 +19,7 @@ export const Products: FC<IProductsProps> = ({ }) => {
             price: 750
         },
         {
-            id: "asdagtasaar34assssd5",
+            _id: "asdagtasaar34assssd5",
             title: "Gigabyte H310M-H",
             category: "Motherboard",
             discount: 0.24,
@@ -25,7 +27,7 @@ export const Products: FC<IProductsProps> = ({ }) => {
             price: 83.25454
         },
         {
-            id: "asdagtasaar34sdsd3sdsddsd5",
+            _id: "asdagtasaar34sdsd3sdsddsd5",
             title: "Intel Core i5 10600f",
             category: "Microprocesador",
             discount: 0,
@@ -33,21 +35,21 @@ export const Products: FC<IProductsProps> = ({ }) => {
             price: 150.43
         },
         {
-            id: "asdagtasaar3435",
+            _id: "asdagtasaar3435",
             title: "Nvidia RTX 3060s Asus Tuff Gaming",
             category: "Graphic Card",
             discount: 0.15,
             image: 'https://dlcdnwebimgs.asus.com/gain/233558c6-999a-4458-98d8-34eac09cb836/w800/fwebp',
             price: 750
         }, {
-            id: "asdagtasaar3435",
+            _id: "asdagtasaar3435",
             title: "Nvidia RTX 3060s Asus Tuff Gaming",
             category: "Graphic Card",
             discount: 0.15,
             image: 'https://dlcdnwebimgs.asus.com/gain/233558c6-999a-4458-98d8-34eac09cb836/w800/fwebp',
             price: 750
         }, {
-            id: "asdagtasaar3435",
+            _id: "asdagtasaar3435",
             title: "Nvidia RTX 3060s Asus Tuff Gaming",
             category: "Graphic Card",
             discount: 0.15,
@@ -55,6 +57,9 @@ export const Products: FC<IProductsProps> = ({ }) => {
             price: 750
         }
     ]
+
+    const { useGetAllProducts } = useDataProducts()
+    const { data: dataProducts } = useGetAllProducts()
 
 
     return (

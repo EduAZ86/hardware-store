@@ -1,20 +1,20 @@
 import axios from "axios";
-import { useSession } from "next-auth/react";
 
-const { data: session } = useSession();
+export default function createAxiosInstance(isAuth: boolean, token: string) {
+    if (isAuth) {
+        return axios.create({
+            baseURL: "/api",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
 
-export const axiosJWTInstance = axios.create({
-    baseURL: "/api",
-    headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.user.token}`,
-    },
-
-})
-
-export const axiosNoAuthInstance = axios.create({
-    baseURL: "/api",
-    headers: {
-        "Content-Type": "application/json",
-    },
-})
+        })
+    }
+    return axios.create({
+        baseURL: "/api",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+}
