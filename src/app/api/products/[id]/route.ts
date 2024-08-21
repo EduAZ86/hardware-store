@@ -6,7 +6,9 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest) => {
     try {
         await connectDB();
-        const productID = req.nextUrl.searchParams.get('productID');
+        const productID = req.nextUrl.searchParams.get('id');
+        console.log(productID);
+        
         if (!productID) {
             throw new Error('productID is required');
         }
@@ -21,7 +23,7 @@ export const GET = async (req: NextRequest) => {
 export const DELETE = async (req: NextRequest) => {
     try {
         await connectDB();
-        const productID = req.nextUrl.searchParams.get('productID');
+        const productID = req.nextUrl.searchParams.get('id');
         if (!productID) {
             throw new Error('productID is required');
         }

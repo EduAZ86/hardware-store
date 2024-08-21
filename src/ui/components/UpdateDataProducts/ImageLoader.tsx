@@ -53,7 +53,7 @@ export const ImageLoader: FC<IImageLoarerProps> = ({
                 >
 
                     <InputField
-                        key={`image-${image}`}                    
+                        key={`image-${image}`}
                         disabled={false}
                         id={`image-${image}`}
                         name={`image-${image}`}
@@ -68,7 +68,10 @@ export const ImageLoader: FC<IImageLoarerProps> = ({
                         src={watch(`image-${image}`) ? watch(`image-${image}`) : "https://via.placeholder.com/150?text=Product"}
                         alt={`image-${image}`}
                     />
+                    <span className="text-light-error text-xs dark:text-dark-error">{errors.message}</span>
+
                 </div>
+
             ))}
 
         </div>

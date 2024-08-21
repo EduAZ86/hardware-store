@@ -10,3 +10,10 @@ export interface IDimensionProductInputsProps {
     register: UseFormRegister
     errors: FieldErrors<FieldValues>
 }
+
+type TUpdaterVariant = "create" | "update"
+export interface IUpdateDataProductsProps {
+    variant: TUpdaterVariant;
+    title: string;
+    ProductID?: string;
+}

@@ -5,7 +5,7 @@ import { DropDownMenu } from "../../common"
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { Price } from "../../common/typography/Price/Price"
 
-export const Kart: FC = () => {
+export const Cart: FC = () => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
     const totalPriceKart = 50
     return (
@@ -15,8 +15,7 @@ export const Kart: FC = () => {
                  h-full
                 display flex flex-row-reverse gap-2
                 relative
-                justify-evenly items-start
-                z-10
+                justify-evenly items-start             
                 group       
             `}
             onMouseEnter={() => setIsHovered(true)}
@@ -38,7 +37,7 @@ export const Kart: FC = () => {
                 >
                 </span>
                 <Category
-                    text="Kart"
+                    text="Cart"
                 />
                 <Price price={totalPriceKart} />
 

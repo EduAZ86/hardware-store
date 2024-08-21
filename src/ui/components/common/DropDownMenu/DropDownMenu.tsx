@@ -14,11 +14,11 @@ export const DropDownMenu: FC<IDropDownMenuProps> = ({
                 `
                 w-full overflow-hidden
                 absolute left-0 -bottom-0
-                transform ${isHovered ? 'translate-y-full opacity-100 z-10' : '-translate-y-0 opacity-0 -z-10'}
+                transform ${isHovered ? 'translate-y-3/4 opacity-100 z-10' : '-translate-y-0 opacity-0 -z-10'}
                 transition-all duration-500 ease-in-out              
                 shadow-lg
                 rounded-sm
-                p-4
+                p-2
             `
             }
         >

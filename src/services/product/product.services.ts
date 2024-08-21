@@ -11,9 +11,25 @@ export const getProducts = async (lengthPage: string, offset: string) => {
     return data
 }
 
+export const getAllInventary = async () => {
+    const data = await ProductModel.find()
+        .lean()
+    return data
+}
+
 export const postNewProduct = async (productData: IProduct) => {
+    console.log(productData);
+    const fonundProductSKU = await ProductModel.findOne({ sku: productData.sku })
+    const fonundProductName = await ProductModel.findOne({ name: productData.name })
+    if (fonundProductSKU) throw new Error('SKU Product already exists');
+    if (fonundProductName) throw new Error('Name Product already exists');
+
     const parsedProduct = ProductSchema.parse(productData);
     const newProduct = new ProductModel({
+        name: parsedProduct.name,
+        description: parsedProduct.description,
+        category: parsedProduct.category,
+        brand: parsedProduct.brand,
         modelProduct: parsedProduct.modelProduct,
         sku: parsedProduct.sku,
         price: parsedProduct.price,

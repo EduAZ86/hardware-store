@@ -4,10 +4,12 @@ import { IBasicFormProps } from "./types";
 
 export const BasicForm: FC<IBasicFormProps> = ({
     children,
+    onSubmit,
     ...otherFormProps
 }) => {
     return (
         <form
+            onSubmit={onSubmit}
             {...otherFormProps}
             className={`
             w-full h-full

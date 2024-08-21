@@ -8,10 +8,16 @@ export const useDataProducts = () => {
     const LENGTHPAGE = 10;
     const session = useSession();
     const getProductInstance = createAxiosInstance(true, session.data?.user?.token as string);
+    const getAllProductsInfinite = createAxiosInstance(false, session.data?.user?.token as string);
 
     const getAllProductsForPage = async ({ pageParam }: { pageParam: number }) => {
         try {
-            const response = await getProductInstance.get(`products?lengthPage=${LENGTHPAGE}&offset=${pageParam * LENGTHPAGE}`);
+            const response = await getAllProductsInfinite.get("products", {
+                params: {
+                    lengthPage: LENGTHPAGE,
+                    offset: pageParam * LENGTHPAGE
+                }
+            });
             return {
                 data: response.data.data as IProductResponse[],
                 nextPage: pageParam + 1,
@@ -23,8 +29,17 @@ export const useDataProducts = () => {
         }
     };
     const getProductById = async ({ id }: { id: string }) => {
-        const response = await getProductInstance.get(`products/${id}`);
+        const response = await getProductInstance.get(`/products/${id}`, {
+            params: {
+                id: id
+            }
+        });
         return response.data.data as IProductResponse;
+    };
+
+    const getAllInventary = async () => {
+        const response = await getAllProductsInfinite.get("inventary");
+        return response.data.data as IProductResponse[];
     };
 
     const createProduct = async (newProduct: IProduct) => {
@@ -38,10 +53,13 @@ export const useDataProducts = () => {
     };
 
     const deleteProduct = async (id: string) => {
-        const response = await getProductInstance.delete(`products/${id}`);
+        const response = await getProductInstance.delete(`products/${id}`, {
+            params: {
+                id: id
+            }
+        });
         return response.data.data as IProductResponse;
     };
-
 
     const useGetAllProducts = () => {
         return useInfiniteQuery({
@@ -52,11 +70,18 @@ export const useDataProducts = () => {
         });
     };
 
-    const useGetProductById = () => {
+    const useGetAllInventary = () => {
         return useQuery({
-            queryKey: ["products"],
+            queryKey: ["inventary"],
+            queryFn: getAllInventary,
+        })
+    };
+
+    const useGetProductById = ({ id }: { id: string }) => {
+        return useQuery({
+            queryKey: ["products", id],
             queryFn: (context) => getProductById({ id: context.queryKey[1] }),
-        
+            enabled: !!id
         })
     };
 
@@ -86,5 +111,6 @@ export const useDataProducts = () => {
         useCreateProduct,
         useUpdateProduct,
         useDeleteProduct,
+        useGetAllInventary
     };
 };

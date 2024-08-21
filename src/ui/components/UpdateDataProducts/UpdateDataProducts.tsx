@@ -1,5 +1,5 @@
 'use client'
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { ButtonWithText, InputTextArea, Title } from "../common";
 import { BasicForm } from "../common/forms";
 import { InputField } from "../common/Inputs/InputField";
@@ -12,19 +12,61 @@ import { validationSchema } from "./validationSchema";
 import { DimensionProductInputs } from "./DimensionProductInputs";
 import { useDataProducts } from "@/hooks/products/useDataProducts";
 import { IProduct } from "@/types/product.types";
+import { IUpdateDataProductsProps } from "./types";
 
 
 
-export const CreateProduct: FC = () => {
+export const UpdateDataProducts: FC<IUpdateDataProductsProps> = ({
+    variant,
+   
+    ProductID
+}) => {
 
-    const { mutate: createProduct } = useDataProducts().useCreateProduct()
+    const { mutate: createProduct, isPending: isPendingCreate } = useDataProducts().useCreateProduct()
+    const { mutate: updateProduct, isPending: isPendingUpdate } = useDataProducts().useUpdateProduct()
+    const { data: product } = useDataProducts().useGetProductById({ id: (variant === "update" && ProductID) ? ProductID as string : '' })
 
     const { handleSubmit, register, reset, formState: { errors }, watch } = useForm(
         {
             resolver: zodResolver(validationSchema)
         }
     )
+
+    useEffect(() => {
+        reset({
+            name: product?.name,
+            category: product?.category,
+            description: product?.description,
+            brand: product?.brand,
+            price: product?.price.price,
+            descriptionDiscount: product?.price.descriptionDiscount,
+            percentageDiscount: product?.price.percentageDiscount,
+            length: product?.dimensions ? product?.dimensions.length : 0,
+            width: product?.dimensions ? product?.dimensions.width : 0,
+            height: product?.dimensions ? product?.dimensions.height : 0,
+            weight: product?.dimensions ? product?.dimensions.weight : 0,
+            modelProduct: product?.modelProduct,
+            releaseDate: product?.releaseDate,
+            sku: product?.sku,
+            averageRating: product?.averageRating,
+            warranty: product?.warranty,
+            manufacturer: product?.manufacturer,
+            stock: product?.stock,
+            "image-1": product?.images ? product?.images[0] : '',
+            "image-2": product?.images ? product?.images[1] : '',
+            "image-3": product?.images ? product?.images[2] : '',
+            "image-4": product?.images ? product?.images[3] : '',
+            "image-5": product?.images ? product?.images[4] : '',
+        })
+    }, [product, reset, variant])
+
+
+
+
     const onSubmit = handleSubmit(async (data) => {
+
+        console.log("data", data);
+
         const newProduct: IProduct = {
             name: data.name,
             category: data.category,
@@ -52,23 +94,38 @@ export const CreateProduct: FC = () => {
         }
         console.log(data)
 
-        await createProduct(newProduct)
+        if (variant === "update") {
+            updateProduct({ id: ProductID as string, updatedProduct: newProduct }, {
+                onSuccess: () => {
+                    reset()
+                }
+            })
+        }
+
+        if (variant === "create") {
+            createProduct(newProduct, {
+                onSuccess: () => {
+                    reset()
+                }
+            })
+        }
     })
 
     return (
         <div
             className={`
-                w-full h-full
+                w-full h-fit
                 flex relative
                 flex-col
-                px-6
+                px-6                
                 `}
         >
             <Title
-                text="Create Product"
+                text={product ? product.name : ""}
             />
             <BasicForm
                 onSubmit={onSubmit}
+                name="createProduct"
             >
                 <div
                     className={`
@@ -118,8 +175,8 @@ export const CreateProduct: FC = () => {
                         key={"Product model"}
                         label={"Product model"}
                         disabled={false}
-                        id="model"
-                        name="model"
+                        id="modelProduct"
+                        name="modelProduct"
                         placeholder="model of the product"
                         type="text"
                         register={register}
@@ -155,8 +212,8 @@ export const CreateProduct: FC = () => {
                         key={"percentage discount"}
                         label={"Percentage discount"}
                         disabled={false}
-                        id="descriptionDiscount"
-                        name="descriptionDiscount"
+                        id="percentageDiscount"
+                        name="percentageDiscount"
                         placeholder="percentage discount of the product"
                         type="number"
                         register={register}
@@ -190,8 +247,8 @@ export const CreateProduct: FC = () => {
                         key={"release date"}
                         label={"Release date"}
                         disabled={false}
-                        id="release_date"
-                        name="release_date"
+                        id="releaseDate"
+                        name="releaseDate"
                         placeholder="release date of the product"
                         type="date"
                         register={register}
@@ -263,10 +320,11 @@ export const CreateProduct: FC = () => {
                     />
                 </div>
                 <ButtonWithText
-                    textButton="Create Product"
+                    textButton={variant === "update" ? "Update" : "Create"}
                     type="submit"
                     buttonSize="full"
                     buttonVariant="backgroundColor"
+                    loading={variant === "update" ? isPendingUpdate : isPendingCreate}
                 />
             </BasicForm>
         </div>

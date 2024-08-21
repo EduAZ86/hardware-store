@@ -11,10 +11,12 @@ export const ButtonWithText: FC<IButtonWithTextProps> = ({
     buttonVariant,
     buttonSize,
     loading,
+    type,
     ...otherButtonProps
 }) => {
     return (
         <button
+            type={type}
             {...otherButtonProps}
             className={twJoin(
                 "w-fit h-fit flex flex-row justify-center items-center relative z-0 rounded-md overflow-hidden group active:scale-95",

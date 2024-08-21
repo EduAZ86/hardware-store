@@ -11,12 +11,18 @@ import { faCartShopping, faHeart, faShare } from "@fortawesome/free-solid-svg-ic
 
 export const CardProduct: FC<ICardProductProps> = ({
     dataProduct: {
-        discount,
-        id,
-        image,
-        price,
+        _id,
+        name,
         category,
-        title
+        description,
+        brand,
+        price: {
+            descriptionDiscount,
+            percentageDiscount,
+            price
+        },
+        images,
+        modelProduct
     }
 }) => {
     const [showButtons, setShowButtons] = useState<boolean>(false)
@@ -56,7 +62,7 @@ export const CardProduct: FC<ICardProductProps> = ({
             onMouseLeave={handleBlur}
             onClick={handleDetail}
         >
-            {discount !== 0 && <Discount discount={discount} />}
+            {percentageDiscount !== 0 && <Discount discount={percentageDiscount / 100} />}
             <div
                 className={`
                     w-full h-3/5 object-cover overflow-hidden flex flex-col justify-center items-center
@@ -68,7 +74,7 @@ export const CardProduct: FC<ICardProductProps> = ({
                     object-cover
                 `}
                     alt='image'
-                    src={image}
+                    src={images[0]}
                 />
                 {showButtons &&
                     <div
@@ -98,9 +104,11 @@ export const CardProduct: FC<ICardProductProps> = ({
             <div
                 className="w-full h-2/5 flex flex-col relative justify-between pb-2 "
             >
-                <Category text={category} />
-                <CardTitle text={title} />
-                <Price price={price} discount={discount} />
+                <div className="w-full flex flex-col justify-start gap-2">
+                    <Category text={category} />
+                    <CardTitle text={name} />
+                </div>
+                <Price price={price} discount={percentageDiscount} />
             </div>
             <BackgroundColor backgroundColor="background" />
         </div>

@@ -7,12 +7,13 @@ const ProductSchema: Schema<IProductDocument> = new Schema<IProductDocument>({
     name: {
         type: String,
         required: [true, "Name is required"],
-        maxlength: 25
+        maxlength: 100,
+        unique: true
     },
     description: {
         type: String,
         required: [true, "Description is required"],
-        maxlength: 300
+        maxlength: 500
     },
     category: {
         type: String,
@@ -20,14 +21,17 @@ const ProductSchema: Schema<IProductDocument> = new Schema<IProductDocument>({
         enum: ['laptop', 'processor', 'graphics', 'memory', 'storage', 'motherboard', 'power supply', 'case', 'monitor', 'keyboard', 'mouse', 'headset', 'speaker', 'casing', 'fan', 'other']
     },
     brand: {
-        type: String
+        type: String,
+        required: [true, "Brand is required"]
     },
     modelProduct: {
-        type: String
+        type: String,
+        required: [true, "Model is required"]
     },
     sku: {
         required: [true, "Sku is required"],
-        type: String
+        type: String,
+        unique: true
     },
     price: {
         price: {
@@ -80,5 +84,7 @@ const ProductSchema: Schema<IProductDocument> = new Schema<IProductDocument>({
 })
 
 const ProductModel: Model<IProductDocument> = models.Product || model<IProductDocument>('Product', ProductSchema);
+// const ProductModel: Model<IProductDocument> = model<IProductDocument>('Product', ProductSchema);
+
 
 export default ProductModel

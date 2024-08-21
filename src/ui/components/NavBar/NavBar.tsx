@@ -6,8 +6,7 @@ import ThemeSwitcher from "@/ui/theme/ThemeSwitcher";
 import { useSession } from "next-auth/react";
 import { UserSession } from "./UserSession/UserSession";
 import Link from "next/link";
-import { IUserSession } from "@/types/user.types";
-import { Kart } from "./Kart/Kart";
+import { Cart } from "./Cart/Cart";
 
 
 export const NavBar: FC<INavBarProps> = ({
@@ -21,7 +20,7 @@ export const NavBar: FC<INavBarProps> = ({
         relative flex
         flex-row
         md:justify-around justify-start
-        md:px-0 px-2
+        md:px-2 px-2
         items-center
         bg-gradient-to-r from-light-primary to-light-secondary
         dark:bg-gradient-to-r dark:from-dark-primary dark:to-dark-secondary
@@ -31,7 +30,7 @@ export const NavBar: FC<INavBarProps> = ({
             <SearchBar />
             {status === "authenticated" &&
                 <div className=" h-full relative flex flex-row justify-center items-start gap-2 pt-4">
-                    <Kart />
+                    <Cart />
                     <UserSession user={user} />
                 </div>
             }

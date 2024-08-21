@@ -16,7 +16,7 @@ export const ProductList: FC<IListProductProps> = ({
             {products.map((product, index) => {
                 return (
                     <CardProduct
-                        key={`${index}-${product.id}`}
+                        key={`${index}-${product._id}`}
                         dataProduct={product}
                     />
                 )

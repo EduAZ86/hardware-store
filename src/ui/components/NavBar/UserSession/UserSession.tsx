@@ -18,7 +18,7 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
                     display flex flex-row-reverse gap-2
                     relative
                     justify-center items-start
-                    z-10
+                  
                     group       
                 `}
             onMouseEnter={() => setIsHovered(true)}
@@ -61,7 +61,7 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
                 backgroundColor="primary"
             >
                 <ul className="flex flex-col gap-2">
-                    {user?.role === "admin" && <ListLI key="addProduct"><Link href={`/newproduct`}>new product</Link></ListLI>}
+                    {user?.role === "admin" && <ListLI key="addProduct"><Link href={`/inventary`}>Inventary</Link></ListLI>}
                     <ListLI key="user"><Link href={`/user/${user?.username}`}>configuration</Link></ListLI>
                     <ListLI key="Logout"><button onClick={() => signOut()}>logout</button></ListLI>
                     <ListLI key="theme">theme: <ThemeSwitcher /></ListLI>

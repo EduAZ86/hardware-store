@@ -60,14 +60,15 @@ export const Products: FC<IProductsProps> = ({ }) => {
 
     const { useGetAllProducts } = useDataProducts()
     const { data: dataProducts } = useGetAllProducts()
-
+    console.log(dataProducts);
+    
 
     return (
         <div>
             <Title text="Products" />
             <CardControlPanel />
             <ProductList
-                products={productsData}
+                products={dataProducts ? dataProducts?.pages[0].data: []}
             />
         </div>
     )

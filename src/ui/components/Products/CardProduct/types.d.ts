@@ -1,7 +1,8 @@
 import { DataProductCard } from "@/types/data.types";
+import { IProductResponse } from "@/types/product.types";
 
 export interface ICardProductProps {
-    dataProduct: DataProductCard;
+    dataProduct: IProductResponse;
 }
 
 export interface IDiscountProps {
