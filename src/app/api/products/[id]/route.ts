@@ -8,7 +8,7 @@ export const GET = async (req: NextRequest) => {
         await connectDB();
         const productID = req.nextUrl.searchParams.get('id');
         console.log(productID);
-        
+
         if (!productID) {
             throw new Error('productID is required');
         }
@@ -16,7 +16,7 @@ export const GET = async (req: NextRequest) => {
         return NextResponse.json({ data: response, status: 200 })
     } catch (error: any) {
         await errorLogSave(error)
-        return NextResponse.json({ error: error.message })
+        return NextResponse.json({ error: error.message, errorCode: error.errorCode })
     }
 }
 

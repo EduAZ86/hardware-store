@@ -1,13 +1,25 @@
-import { FC, useState } from "react"
-import { Category } from "../../common/typography/Category/Category"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { DropDownMenu } from "../../common"
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
-import { Price } from "../../common/typography/Price/Price"
+"use client"
+import { FC, useState } from "react";
+import { Category } from "../../common/typography/Category/Category";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { DropDownMenu } from "../../common";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { Price } from "../../common/typography/Price/Price";
 
-export const Cart: FC = () => {
+import { ICartNavBarProps } from "./types";
+import { useRouter } from "next/navigation";
+import { useUserCartStore } from "@/lib/store/usercart/useUserCartStore";
+
+export const Cart: FC<ICartNavBarProps> = ({
+    userID
+}) => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
-    const totalPriceKart = 50
+    const { totalPrice, cartData } = useUserCartStore()
+    const router = useRouter();
+    const handleCartClick = () => {
+        router.replace(`/cart/${userID}`);
+    }
+
     return (
         <div
             className={`
@@ -20,6 +32,7 @@ export const Cart: FC = () => {
             `}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={handleCartClick}
         >
             <div
                 className={`
@@ -39,8 +52,10 @@ export const Cart: FC = () => {
                 <Category
                     text="Cart"
                 />
-                <Price price={totalPriceKart} />
-
+                <Price
+                    price={totalPrice}
+                    size="sm"
+                />
             </div>
             <span
                 className={`
@@ -51,12 +66,10 @@ export const Cart: FC = () => {
                         hover: duration-300 group-hover:border-light-primary dark:group-hover:border-dark-primary               
                     `}
             >
-
                 <FontAwesomeIcon
                     icon={faShoppingCart}
                     className="text-md text-center text-light-text dark:text-dark-text"
                 />
-
             </span>
             <DropDownMenu
                 key="session"

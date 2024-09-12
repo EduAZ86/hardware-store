@@ -7,6 +7,8 @@ import { signOut } from "next-auth/react";
 import ThemeSwitcher from "@/ui/theme/ThemeSwitcher";
 import { ListLI } from "./ListLI";
 export const UserSession: FC<IUserSessionProps> = ({ user }) => {
+    console.log("user", user);
+    
     const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
     const [isHovered, setIsHovered] = useState<boolean>(false);
 

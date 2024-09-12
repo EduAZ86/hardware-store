@@ -8,3 +8,6 @@ export * from "./forms";
 export * from "./Inputs";
 export * from "./selects";
 export { PageContainer } from "./Containers/PageContainer";
+export { PagesTabs } from "./PagesTabs/PagesTabs";
+export { InfoCard } from "./InfoCard/InfoCard";
+export { RatingStarts } from "./RatingStarts/RatingStarts";

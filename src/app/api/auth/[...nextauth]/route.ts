@@ -28,14 +28,13 @@ export const authOptions: AuthOptions = {
                     if (!user) {
                         throw new ErrorLog("User not found", 'error', 'authorize', undefined, '/login');
                     }
-
                     const response: IUserSession = {
                         id: user._id.toString(),
                         name: user.username,
                         email: user.email,
                         image: user.picture,
                         userData: user,
-                        token: "token"
+                        token: user._id.toString()
 
                     }
                     return response
@@ -63,27 +62,29 @@ export const authOptions: AuthOptions = {
             try {
                 await connectDB();
                 if (user && user.email && user.name && user.image) {
+                    let completeUser: IUserResponse;
                     const existingUser = await checkUser(user.email);
                     if (!existingUser && account && account.provider === "google") {
                         const newUser: INewUser = {
+                            id: user.id,
                             username: user.name,
                             email: user.email,
                             password: randomPassword(10),
                             role: "user",
                             picture: user.image
                         };
-                        await registerUser(newUser);
+                        completeUser = await registerUser(newUser);
                     }
-                    const completeUser: IUserResponse = await getUser(user.email);
+                    completeUser = await getUser(user.email);
                     token.user = {
                         ...user,
                         ...token,
                         userData: completeUser
                     };
-                    console.log("token", token);
 
                 }
             } catch (error: any) {
+                console.log("error", error);
                 await errorLogSave(error);
             }
             return token;
@@ -93,7 +94,6 @@ export const authOptions: AuthOptions = {
                 ...token.user as Omit<IUserSession, 'token'>,
                 token: token.jti as string,
             };
-
             return session
         }
     }
@@ -101,13 +101,10 @@ export const authOptions: AuthOptions = {
         signIn: "/auth/login"
     },
     secret: process.env.NEXTAUTH_SECRET,
-
     session: {
         strategy: "jwt"
     },
     debug: process.env.NODE_ENV === 'development'
 }
-
 const handler = NextAuth(authOptions)
-
 export { handler as GET, handler as POST }

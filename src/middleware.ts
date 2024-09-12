@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
 
     const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
-    if (req.nextUrl.pathname === "/api/getallproducts" && req.method === "GET") {
+    if (req.nextUrl.pathname === "/api/products" && req.method === "GET") {
         return NextResponse.next();
     }
 

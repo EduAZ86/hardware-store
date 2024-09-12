@@ -1,8 +1,10 @@
-import { ICart, ICartItem } from "@/types/cart.types";
 import { Document, model, Model, models, Schema } from "mongoose";
+import { ICart, ICartItem } from "@/types/cart.types";
 
 interface ICartDocument extends Omit<ICart, 'userID'>, Document {
     userID: Schema.Types.ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 interface ICartItemDoc extends Omit<ICartItem, 'productID'> {
@@ -18,15 +20,10 @@ const CartItemSchema: Schema<ICartItemDoc> = new Schema<ICartItemDoc>({
     quantity: {
         type: Number,
         required: true
-    },
-    subTotalPrice: {
-        type: Number,
-        required: true
     }
 });
 
 const CartSchema: Schema<ICartDocument> = new Schema<ICartDocument>({
-
     userID: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -34,14 +31,6 @@ const CartSchema: Schema<ICartDocument> = new Schema<ICartDocument>({
     },
     items: {
         type: [CartItemSchema],
-        required: true
-    },
-    totalPrice: {
-        type: Number,
-        required: true
-    },
-    totalQuantity: {
-        type: Number,
         required: true
     },
     status: {
@@ -55,4 +44,4 @@ const CartSchema: Schema<ICartDocument> = new Schema<ICartDocument>({
 
 const CartModel: Model<ICartDocument> = models.Cart || model<ICartDocument>('Cart', CartSchema);
 
-export default CartModel
+export default CartModel;

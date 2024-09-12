@@ -5,30 +5,31 @@ import { twJoin } from "tailwind-merge";
 
 export const Price: FC<IPriceProps> = ({
     price,
-    discount = 0
+    discount = 0,
+    size
+
 }) => {
-    const promotionalPrice = price - price * discount/100;
+    const promotionalPrice = price - price * discount / 100;
     return (
         <div
-            className={`
-            w-full
-            flex flex-row
-            gap-3
-            justify-start
-            items-center
-            relative
-            `}
+            className={twJoin(
+                "w-full flex flex-row gap-3 justify-start items-center relative font-semibold px-3",
+                size === "sm" && "text-sm",
+                size === "xl" && "text-xl",
+                size === "3xl" && "text-3xl",
+            )}
+
         >
             {discount !== 0 &&
                 <span
-                    className={`text-sm font-bold text-light-primary dark:text-dark-primary text-center`}
+                    className={`font-bold text-light-primary dark:text-dark-primary text-center`}
                 >
                     $ {priceFormatter(promotionalPrice)}
                 </span>}
             <span
                 className={twJoin(
                     " text-light-text dark:text-dark-text text-center",
-                    discount ? "line-through text-sm opacity-50" : "text-sm opacity-100",
+                    discount ? "line-through opacity-50" : "opacity-100",
                 )}
             >
                 $ {priceFormatter(price)}

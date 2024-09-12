@@ -1,11 +1,12 @@
-import { PageContainer } from "@/ui/components/common"
-import { ProductsInventary } from "@/ui/components/Inventary/Inventary"
+import { ProductsInventary } from "@/ui";
+import { PageContainer } from "@/ui/components/common";
+
 
 function Inventary() {
     return (
-    <PageContainer>
-        <ProductsInventary/>
-    </PageContainer>
+        <PageContainer>
+            <ProductsInventary />
+        </PageContainer>
     )
 }
 

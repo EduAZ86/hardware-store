@@ -1,24 +1,26 @@
-import { Schema } from "mongoose";
-import { IProduct } from "./product.types";
+import { Date, Schema } from "mongoose";
+import { IProduct, TPrice } from "./product.types";
 
 type TCartStatus = 'active' | 'completed' | 'cancelled';
 
-export interface ICartItem {
-    productID: string;
-    quantity: number;
-    subTotalPrice: number;
-}
 
 export interface ICart {
     userID: string;
     items: ICartItem[];
-    totalPrice: number;
-    totalQuantity: number;
-    status: TCartStatus;
 }
 
-export interface ICartResponse extends ICart {
-    _id: string;
-    createdAt: Date;
-    updatedAt: Date;
+export interface ICartItem {
+    productID: string;
+    quantity: number;
+}
+export interface ICartItemResponse extends ICartItem {
+    price: TPrice;
+    name: string;
+    image: string;
+}
+
+export interface ICartResponse {
+    userID: string;
+    items: ICartItemResponse[];
+    updatedAt: string;
 }

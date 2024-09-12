@@ -8,24 +8,28 @@ import { Category } from "../../common/typography/Category/Category";
 import { Discount } from "./Discount";
 import { CardButton } from "./CardButton/CardButton";
 import { faCartShopping, faHeart, faShare } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useDataUserCart } from "@/hooks/carts/useDataUserCart";
+
 
 export const CardProduct: FC<ICardProductProps> = ({
     dataProduct: {
         _id,
         name,
         category,
-        description,
-        brand,
         price: {
-            descriptionDiscount,
             percentageDiscount,
             price
         },
-        images,
-        modelProduct
+        images
     }
 }) => {
     const [showButtons, setShowButtons] = useState<boolean>(false)
+    const { status: statusSession, data: userSessionData } = useSession()
+
+    const { mutate: udateCartData } = useDataUserCart().useAddProductToCart()
+    const router = useRouter();
     const handleFocus = () => {
         setShowButtons(true)
     }
@@ -33,22 +37,26 @@ export const CardProduct: FC<ICardProductProps> = ({
         setShowButtons(false)
     }
 
-    const handleAddCart = () => {
+    const handleAddCart = (event: React.MouseEvent) => {
+        event.stopPropagation();
+        if (statusSession === "authenticated") {
+            udateCartData(_id)
+        } else {
+            router.push("/login")
+        }
+    }
 
+    const handleAddFav = (event: React.MouseEvent) => {
+        event.stopPropagation();
     }
 
 
-    const handleAddFav = () => {
-
-    }
-
-
-    const handleShare = () => {
-
+    const handleShare = (event: React.MouseEvent) => {
+        event.stopPropagation();
     }
 
     const handleDetail = () => {
-
+        router.push(`/detail/${_id}`);
     }
 
     return (

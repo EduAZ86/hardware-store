@@ -1,3 +1,3 @@
-export interface IKartProps {
-    
+export interface ICartNavBarProps {
+    userID: string;
 }

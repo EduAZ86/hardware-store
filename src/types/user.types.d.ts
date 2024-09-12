@@ -3,7 +3,13 @@ import { User } from 'next-auth';
 
 type Role = "admin" | "user"
 
+type ItemCart = {
+    productID: string;
+    quantity: number;
+}
+
 export interface INewUser {
+    id?: string;
     username: string;
     email: string;
     password: string;
@@ -12,21 +18,27 @@ export interface INewUser {
 }
 
 export interface IUser {
+    _id: string;
     username: string;
     email: string;
     password: string;
     picture?: string;
     role: 'admin' | 'user';
-    favoriteProducts: string[];
+    favoriteProducts?: string[];
+    cartProducts?: ItemCart[];
     createdAt?: Date;
     updatedAt?: Date;
 }
 
-export interface IUserResponse extends Omit<IUser, "password"> {
+export interface IUserResponse extends Omit<IUser, "password"> {    
+}
+
+export interface User {
     _id: string;
 }
 
 export interface IUserSession {
+    _id?: string;
     id: string;
     name: string;
     email: string;
@@ -35,8 +47,3 @@ export interface IUserSession {
     token: string;
 }
 
-
-
-// export interface IUserSession extends User {
-//     _doc: IUserDataBaseResponse
-// }
