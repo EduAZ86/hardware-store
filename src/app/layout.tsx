@@ -23,6 +23,7 @@ export default function RootLayout({
         <Providers>
           <NavBar />
           {children}
+          
         </Providers>
       </body>
     </html>

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { IUseUserCartStore } from "./types";
-import { ICartItemResponse, ICartResponse } from "@/types/cart.types";
+import {  ICartResponse } from "@/types/cart.types";
 
 const initialCartData: ICartResponse = {
     userID: "",
@@ -12,9 +12,12 @@ export const useUserCartStore = create<IUseUserCartStore>((set) => ({
     cartData: initialCartData,
     totalPrice: 0,
     setCartData: (cartData: ICartResponse) => set((state) => ({
+        ...state,
         cartData,
-        totalPrice: cartData.items.reduce((total, item) => total + (item.price.price * item.quantity), 0)
+        totalPrice: cartData ? cartData?.items.reduce((total, item) => total + (item.price.price * item.quantity), 0) : 0
     })),
+
+
     increaseQuantityItem: (productID: string, stock: number) =>
         set(
             (state) => {

@@ -11,6 +11,8 @@ import { faCartShopping, faHeart, faShare } from "@fortawesome/free-solid-svg-ic
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useDataUserCart } from "@/hooks/carts/useDataUserCart";
+import { useDataFavorites } from "@/hooks/favorites/useDataFavorites";
+import { useFavoritesStore } from "@/lib/store/favorites/useFavoritesStore";
 
 
 export const CardProduct: FC<ICardProductProps> = ({
@@ -27,7 +29,7 @@ export const CardProduct: FC<ICardProductProps> = ({
 }) => {
     const [showButtons, setShowButtons] = useState<boolean>(false)
     const { status: statusSession, data: userSessionData } = useSession()
-
+    const addToFav = useDataFavorites().useAddProductToFavorites()
     const { mutate: udateCartData } = useDataUserCart().useAddProductToCart()
     const router = useRouter();
     const handleFocus = () => {
@@ -48,6 +50,11 @@ export const CardProduct: FC<ICardProductProps> = ({
 
     const handleAddFav = (event: React.MouseEvent) => {
         event.stopPropagation();
+        if (statusSession === "authenticated") {
+            addToFav(_id)
+        } else {
+            router.push("/login")
+        }
     }
 
 

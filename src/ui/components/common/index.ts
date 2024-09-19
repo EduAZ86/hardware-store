@@ -11,3 +11,4 @@ export { PageContainer } from "./Containers/PageContainer";
 export { PagesTabs } from "./PagesTabs/PagesTabs";
 export { InfoCard } from "./InfoCard/InfoCard";
 export { RatingStarts } from "./RatingStarts/RatingStarts";
+export { Loader } from "./Loader/Loader";

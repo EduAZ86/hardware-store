@@ -3,133 +3,79 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import createAxiosInstance from "@/lib/axios/axiosInstance";
 import { ICart, ICartResponse } from "@/types/cart.types";
 import { useSession } from "next-auth/react";
+import { addProductToCart, deleteProductCart, getCartUser, updateCart, updateProductsCart } from "./fetchingCartData";
+import { useEffect } from "react";
+import { useUserCartStore } from "@/lib/store/usercart/useUserCartStore";
 
 export const useDataUserCart = () => {
 
     const session = useSession();
     const id = session.data?.user?.userData?._id as string;
     const dataUserCartInstance = createAxiosInstance(true, id);
-
-    const getCartUser = async (userID: string) => {
-        try {
-            const response = await dataUserCartInstance.get(`/usercart/`,
-                {
-                    params: {
-                        userID: userID
-                    }
-                }
-            );
-            return response.data.data as ICartResponse
-        } catch (error) {
-            console.log(error);
-            throw new Error("Error fetching data");
-        }
-    }
-
-    const addProductToCart = async (productID: string) => {
-        try {
-            const response = await dataUserCartInstance.post(`/usercart`,
-                { productID: productID },
-                {
-                    params: {
-                        id: id
-                    }
-                }
-            );
-            return response.data.data as ICartResponse
-        } catch (error) {
-            console.log(error);
-            throw new Error("Error fetching data");
-        }
-    }
-
-    const updateCart = async (updatedCart: ICart) => {
-        try {
-            const response = await dataUserCartInstance.put(`/usercart`,
-                updatedCart,
-                {
-                    params: {
-                        id: id
-                    }
-                }
-            );
-            return response.data.data as ICartResponse
-        } catch (error) {
-            console.log(error);
-            throw new Error("Error fetching data");
-        }
-    }
-
-    const updateProductsCart = async ({ productID, quantity }: { productID: string, quantity: number }) => {
-        try {
-            const response = await dataUserCartInstance.patch(`/usercart`,
-                {
-                    productID: productID,
-                    quantity: quantity
-                },
-                {
-                    params: {
-                        id: id
-                    }
-                }
-            );
-            return response.data.data as ICartResponse
-        } catch (error) {
-            console.log(error);
-            throw new Error("Error fetching data");
-        }
-    }
-
-    const deleteProductCart = async (productID: string) => {
-        try {
-            const response = await dataUserCartInstance.delete(`/usercart`, {
-                params: {
-                    productID: productID
-                }
-            });
-            return response.data.data as ICartResponse
-        } catch (error) {
-            console.log(error);
-            throw new Error("Error fetching data");
-        }
-    }
+    const { cartData, setCartData, totalPrice } = useUserCartStore();
 
     const useGetCartUser = (userID: string) => {
-        const Query = useQuery({
+        const { data: cart, isSuccess, error, refetch, isLoading } = useQuery({
             queryKey: ["userCart"],
-            queryFn: () => getCartUser(userID),
+            queryFn: () => getCartUser(userID, dataUserCartInstance)
+        })
+        useEffect(() => {
+            if (isSuccess && cart) {
+                setCartData(cart);
+            }
+            return () => {
+                refetch();
+                setCartData(cart as ICartResponse);
+            }
+        }, [isSuccess, cart])
 
-        });
-        return Query
+        return {
+            cartData,
+            refetch,
+            error,
+            isLoading,
+            totalPrice
+        }
     };
 
     const useAddProductToCart = () => {
         return useMutation({
             mutationKey: ["userCart"],
-            mutationFn: (productID: string) => addProductToCart(productID)
+            mutationFn: (productID: string) => addProductToCart(productID, id, dataUserCartInstance),
+            onSuccess(data) {
+                setCartData(data);
+            }
         })
     }
 
     const useUpdateCart = () => {
         return useMutation({
             mutationKey: ["userCart"],
-            mutationFn: (updatedCart: ICart) => updateCart(updatedCart),
+            mutationFn: (updatedCart: ICart) => updateCart(updatedCart, id, dataUserCartInstance),
+            onSuccess(data) {
+                setCartData(data);
+            }
+
         })
     };
 
     const useUpdateProductsCart = () => {
         return useMutation({
             mutationKey: ["userCart"],
-            mutationFn: ({ productID, quantity }: { productID: string, quantity: number }) => updateProductsCart({ productID, quantity }),
-
+            mutationFn: ({ productID, quantity }: { productID: string, quantity: number }) => updateProductsCart({ productID, quantity }, id, dataUserCartInstance),
+            onSuccess(data) {
+                setCartData(data);
+            }
         })
     }
 
     const useDeleteProductCart = () => {
         return useMutation({
             mutationKey: ["userCart"],
-            mutationFn: (productID: string) => deleteProductCart(productID),
-
+            mutationFn: (productID: string) => deleteProductCart(productID, id, dataUserCartInstance),
+            onSuccess(data) {
+                setCartData(data);
+            }
         })
     }
 

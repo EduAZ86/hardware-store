@@ -6,14 +6,15 @@ import ThemeSwitcher from "@/ui/theme/ThemeSwitcher";
 import { useSession } from "next-auth/react";
 import { UserSession } from "./UserSession/UserSession";
 import Link from "next/link";
-import { Cart } from "./Cart/Cart";
+import { Cart } from "./CartButton/CartButton";
 import { NavButton } from "./UserSession/NavButton";
 
 export const NavBar: FC<INavBarProps> = ({
 }) => {
-    const { data: session, status } = useSession()
-    const sessionUser = session?.user
-    const user = sessionUser?.userData 
+    const { data: session, status } = useSession();
+    const sessionUser = session?.user;
+    const user = sessionUser?.userData;
+    const favoritesUrl = `/favorites/${user?._id}`
 
     return (
         <div
@@ -35,8 +36,8 @@ export const NavBar: FC<INavBarProps> = ({
                 <SearchBar />
                 {status === "authenticated" &&
                     <div className=" h-full relative flex flex-row justify-center items-start gap-2 pt-4">
-                        <Cart 
-                            userID={user?._id as string} 
+                        <Cart
+                            userID={user?._id as string}
                         />
                         <UserSession user={user} />
                     </div>
@@ -51,8 +52,8 @@ export const NavBar: FC<INavBarProps> = ({
             <div className="w-full h-fit flex justify-center items-center pb-2 gap-4 opacity-90">
                 <NavButton key={"home"} href="/" text="Home" leftBorder />
                 <NavButton key={"offers"} href="/offers" text="Offers" leftBorder />
-                <NavButton key={"history"} href="/history" text="History" leftBorder/>
-                <NavButton key={"favorites"} href="/favorites" text="Favorites" />
+                <NavButton key={"history"} href="/history" text="History" leftBorder />
+                <NavButton key={"favorites"} href={favoritesUrl} text="Favorites" />
             </div>
         </div>
     )

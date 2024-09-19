@@ -4,7 +4,7 @@ export interface ICartCardProps {
     userID: string;
     item: ICartItemResponse;
     quantity: number;
-    increaseItem: (productID: string, stock: number) => void;
-    decreaseItem: (productID: string) => void;
-    removeItem: (productID: string) => void;  
+    increaseItem: (currentItem: ICartItem) => void;
+    decreaseItem: (currentItem: ICartItem) => void;
+    removeItem: (productID: string) => void;
 }

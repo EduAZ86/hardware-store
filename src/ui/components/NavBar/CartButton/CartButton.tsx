@@ -5,16 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DropDownMenu } from "../../common";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Price } from "../../common/typography/Price/Price";
-
 import { ICartNavBarProps } from "./types";
 import { useRouter } from "next/navigation";
-import { useUserCartStore } from "@/lib/store/usercart/useUserCartStore";
+import { useDataUserCart } from "@/hooks/carts/useDataUserCart";
 
 export const Cart: FC<ICartNavBarProps> = ({
     userID
 }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
-    const { totalPrice, cartData } = useUserCartStore()
+    const { totalPrice, cartData } = useDataUserCart().useGetCartUser(userID);
+
     const router = useRouter();
     const handleCartClick = () => {
         router.replace(`/cart/${userID}`);
@@ -23,7 +23,7 @@ export const Cart: FC<ICartNavBarProps> = ({
     return (
         <div
             className={`
-                md:w-40 w-20
+                md:w-48 w-20
                  h-full
                 display flex flex-row-reverse gap-2
                 relative
@@ -76,10 +76,17 @@ export const Cart: FC<ICartNavBarProps> = ({
                 isHovered={isHovered}
                 backgroundColor="primary"
             >
-                <ul className="flex flex-col gap-2">
-                    {/* <ListLI key="user"><Link href={`/user/${user?.username}`}>configuration</Link></ListLI>
-                <ListLI key="Logout"><button onClick={() => signOut()}>logout</button></ListLI>
-                <ListLI key="theme">theme: <ThemeSwitcher /></ListLI> */}
+                <ul className="h-fit flex flex-col gap-2">
+                    {cartData?.items?.map((product) => (
+                        <li
+                            key={product.productID}
+                            className="flex flex-row justify-around gap-2 text-light-text dark:text-dark-text overflow-hidden"
+                        >
+                            <span className="text-sm">{product.quantity}</span>
+                            <img src={product.image} className="w-6 h-6"/>
+                            <span className="text-xs truncate">{product.name}</span>
+                        </li>
+                    ))}
                 </ul>
             </DropDownMenu>
         </div>

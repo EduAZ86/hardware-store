@@ -1,7 +1,7 @@
 import connectDB from "@/lib/db/db";
 import { errorLogSave } from "@/services/error/errorLogService";
 import { deleteItemFavorites, getFavoritesByUserID, postNewItemFavorites, updateFavorites } from "@/services/favorites/favorites.services";
-import { IFavoriteItem, IFavorites } from "@/types/favorites";
+import { IFavoriteItem } from "@/types/favorites";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
@@ -22,8 +22,10 @@ export const GET = async (req: NextRequest) => {
 export const POST = async (req: NextRequest) => {
     try {
         await connectDB();
-        const userID = req.nextUrl.searchParams.get('userID');
-        const productID = req.nextUrl.searchParams.get('productID');
+        const data = await req.json();
+        console.log(data);
+        
+        const { userID, productID } = data.params;
         if (!userID) {
             throw new Error('userID is required');
         }

@@ -24,7 +24,7 @@ export const Price: FC<IPriceProps> = ({
                 <span
                     className={`font-bold text-light-primary dark:text-dark-primary text-center`}
                 >
-                    $ {priceFormatter(promotionalPrice)}
+                    {priceFormatter(promotionalPrice)}
                 </span>}
             <span
                 className={twJoin(
@@ -32,7 +32,7 @@ export const Price: FC<IPriceProps> = ({
                     discount ? "line-through opacity-50" : "opacity-100",
                 )}
             >
-                $ {priceFormatter(price)}
+                {priceFormatter(price)}
             </span>
         </div>
     )

@@ -39,7 +39,7 @@ export const CartCard: FC<ICartCardProps> = ({
                         <IconButton
                             key={"decreaseQuantity"}
                             icon={faMinus}
-                            onClick={() => decreaseItem(item.productID)}
+                            onClick={() => decreaseItem({ productID: item.productID, quantity: item.quantity - 1 })}
                         />
                         :
                         <IconButton
@@ -53,7 +53,7 @@ export const CartCard: FC<ICartCardProps> = ({
                     <IconButton
                         key={"increaseQuantity"}
                         icon={faPlus}
-                        onClick={() => increaseItem(item.productID, product ? product.stock : 0)}
+                        onClick={() => increaseItem({ productID: item.productID, quantity: item.quantity + 1 })}
                         disabled={!(quantity < product.stock)}
                     />
                 </div>
