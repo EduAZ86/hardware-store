@@ -7,10 +7,8 @@ import { Loader, MainTitle, Price } from "../common";
 import { useDataUserCart } from "@/hooks/carts/useDataUserCart";
 import { useUserCartStore } from "@/lib/store/usercart/useUserCartStore";
 export const CartComponent: FC<ICartProps> = ({
-
     totalPrice,
-    isLoading,
-    refetch
+    isLoading,   
 }) => {
     const {
         cartData,
