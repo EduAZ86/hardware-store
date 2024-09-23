@@ -1,6 +1,7 @@
 import connectDB from "@/lib/db/db"
 import { errorLogSave } from "@/services/error/errorLogService";
 import { getOrdersByUserID, postNewOrder } from "@/services/order/order.services";
+import { IOrder } from "@/types/order.types";
 import { NextRequest, NextResponse } from "next/server"
 
 export const GET = async (req: NextRequest) => {
@@ -20,8 +21,8 @@ export const GET = async (req: NextRequest) => {
 
 export const POST = async (req: NextRequest) => {
     try {
-        await connectDB();
-        const orderData = await req.json();
+        await connectDB()
+        const orderData = await req.json() as IOrder
         if (!orderData) {
             throw new Error('Order data is required');
         }

@@ -1,22 +1,37 @@
 import { Date } from "mongoose";
+import { ICartItem, ICartItemResponse } from "./cart.types";
+
+type paymentMethod = 'transfer' | 'paypal' | 'stripe' | 'mercadopago' | 'rapipago' | 'pagofacil';;
 
 type TOrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
 type TPayment = {
-    paymentMethod: string;
+    paymentMethod: paymentMethod;
     paymentStatus: boolean;
+}
+
+type shippingAddress = {
+    address: string;
+    city: string;
+    country: string;
+    postalCode: string;
 }
 
 export interface IOrder {
     userID: string;
-    cartID: string;
+    userName: string;
+    phoneNumber: string;
+    email: string;
+    items: ICartItem[];
     totalAmount: number;
+    shippingData: shippingAddress;
+    orderNotes: string;
     status: TOrderStatus;
-    payment: TPayment;
-    shippingAddress: string;
+    payment?: TPayment;
 }
 
-export interface IOrderResponse extends IOrder {
+export interface IOrderResponse extends Omit<IOrder, 'items'> {
+    items: ICartItemResponse[];
     _id: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }

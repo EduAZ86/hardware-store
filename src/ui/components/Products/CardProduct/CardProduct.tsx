@@ -12,8 +12,6 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useDataUserCart } from "@/hooks/carts/useDataUserCart";
 import { useDataFavorites } from "@/hooks/favorites/useDataFavorites";
-import { useFavoritesStore } from "@/lib/store/favorites/useFavoritesStore";
-
 
 export const CardProduct: FC<ICardProductProps> = ({
     dataProduct: {

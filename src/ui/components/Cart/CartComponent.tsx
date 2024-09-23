@@ -3,12 +3,13 @@ import { FC } from "react";
 import { ICartProps } from "./types";
 import { ICartItem } from "@/types/cart.types";
 import { CartCard } from "./CardCart/CartCard";
-import { Loader, MainTitle, Price } from "../common";
+import { ButtonWithText, Loader, MainTitle, Price } from "../common";
 import { useDataUserCart } from "@/hooks/carts/useDataUserCart";
 import { useUserCartStore } from "@/lib/store/usercart/useUserCartStore";
+import { useRouter } from "next/navigation";
 export const CartComponent: FC<ICartProps> = ({
     totalPrice,
-    isLoading,   
+    isLoading,
 }) => {
     const {
         cartData,
@@ -16,7 +17,7 @@ export const CartComponent: FC<ICartProps> = ({
 
     const { mutate: updatQuantityItem } = useDataUserCart().useUpdateProductsCart();
     const { mutate: deleteProduct } = useDataUserCart().useDeleteProductCart();
-
+    const cartRouter = useRouter();
     const decreaseQuantityItem = (item: ICartItem) => {
         updatQuantityItem(item);
     }
@@ -28,6 +29,14 @@ export const CartComponent: FC<ICartProps> = ({
     const removeItem = (productID: string) => {
         deleteProduct(productID);
     }
+
+    const handleNexttoOrder = () => {
+        cartRouter.push('/checkout')
+     }
+
+    const handleContinueShopping = () => {
+        cartRouter.push('/')
+     }
 
     return (
         <div
@@ -77,24 +86,44 @@ export const CartComponent: FC<ICartProps> = ({
                             `}
                         >
                             <span key="product" className="col-span-3"></span>
-                            <div key="price"
-                                className={`
-                                col-span-2
-                                w-full h-20 
-                                display flex flex-row 
-                                justify-between items-center
-                                gap-2 
-                                rounded-md
-                                px-4
-                                overflow-hidden p-1
-                                bg-light-acent dark:bg-dark-acent                                
-                                `}
+                            <div
+                                className=" w-full col-span-2 flex flex-col gap-4"
                             >
-                                <span className="w-1/2">Total</span>
-                                {totalPrice && <div className="w-fit">
-                                    <Price price={totalPrice} />
+                                <div key="price"
+                                    className={`
+                                    col-span-2
+                                    w-full h-20 
+                                    display flex flex-row 
+                                    justify-between items-center
+                                    gap-2 
+                                    rounded-md
+                                    px-4
+                                    overflow-hidden p-1
+                                    bg-light-acent dark:bg-dark-acent                                
+                                    `}
+                                >
+                                    <span className="w-1/2">Total</span>
+                                    {totalPrice && <div className="w-fit">
+                                        <Price price={totalPrice} />
+                                    </div>
+                                    }
                                 </div>
-                                }
+                                <div className="w-full flex flex-row justify-between gap-4">
+                                    <ButtonWithText
+                                        key="continue shopping"
+                                        onClick={handleContinueShopping}
+                                        buttonSize="full"
+                                        buttonVariant="transparent"
+                                        textButton="Continue shopping"
+                                    />
+                                    <ButtonWithText
+                                        key="checkout"
+                                        onClick={handleNexttoOrder}
+                                        buttonSize="full"
+                                        buttonVariant="backgroundColor"
+                                        textButton="Checkout"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
