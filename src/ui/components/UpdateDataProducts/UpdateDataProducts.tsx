@@ -63,10 +63,7 @@ export const UpdateDataProducts: FC<IUpdateDataProductsProps> = ({
 
 
 
-    const onSubmit = handleSubmit(async (data) => {
-
-        console.log("data", data);
-
+    const onSubmit = handleSubmit(async (data) => {  
         const newProduct: IProduct = {
             name: data.name,
             category: data.category,
@@ -91,9 +88,7 @@ export const UpdateDataProducts: FC<IUpdateDataProductsProps> = ({
             warranty: data.warranty,
             manufacturer: data.manufacturer,
             stock: data.stock
-        }
-        console.log(data)
-
+        } 
         if (variant === "update") {
             updateProduct({ id: ProductID as string, updatedProduct: newProduct }, {
                 onSuccess: () => {
@@ -101,7 +96,6 @@ export const UpdateDataProducts: FC<IUpdateDataProductsProps> = ({
                 }
             })
         }
-
         if (variant === "create") {
             createProduct(newProduct, {
                 onSuccess: () => {

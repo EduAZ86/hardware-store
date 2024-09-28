@@ -15,6 +15,7 @@ export const InputField: FC<IInputFieldProps> = ({
 }) => {
 
     const watchedValue = watch ? watch(name) : "";
+    
     return (
         <div
             className={`
@@ -53,7 +54,7 @@ export const InputField: FC<IInputFieldProps> = ({
                     focus:ring-light-secondary dark:focus:ring-dark-secondary
                     `}
             />
-            <span className="text-light-error text-xs dark:text-dark-error">{errors[name]?.message}</span>
+            <span className="text-light-error text-xs dark:text-dark-error">{errors[name]?.message && typeof errors[name].message === 'string' ? errors[name].message: ""}</span>
         </div>
     )
 }

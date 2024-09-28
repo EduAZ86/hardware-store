@@ -1,7 +1,7 @@
 import { Date } from "mongoose";
 import { ICartItem, ICartItemResponse } from "./cart.types";
 
-type paymentMethod = 'transfer' | 'paypal' | 'stripe' | 'mercadopago' | 'rapipago' | 'pagofacil';;
+type paymentMethod = 'pending' | 'transfer' | 'paypal' | 'stripe' | 'mercadopago' | 'rapipago' | 'pagofacil';
 
 type TOrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
 type TPayment = {

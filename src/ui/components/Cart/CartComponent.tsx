@@ -5,16 +5,11 @@ import { ICartItem } from "@/types/cart.types";
 import { CartCard } from "./CardCart/CartCard";
 import { ButtonWithText, Loader, MainTitle, Price } from "../common";
 import { useDataUserCart } from "@/hooks/carts/useDataUserCart";
-import { useUserCartStore } from "@/lib/store/usercart/useUserCartStore";
 import { useRouter } from "next/navigation";
 export const CartComponent: FC<ICartProps> = ({
-    totalPrice,
-    isLoading,
+    userID
 }) => {
-    const {
-        cartData,
-    } = useUserCartStore();
-
+    const { cartData, totalPrice, isLoading } = useDataUserCart().useGetCartUser(userID as string);
     const { mutate: updatQuantityItem } = useDataUserCart().useUpdateProductsCart();
     const { mutate: deleteProduct } = useDataUserCart().useDeleteProductCart();
     const cartRouter = useRouter();
@@ -31,12 +26,12 @@ export const CartComponent: FC<ICartProps> = ({
     }
 
     const handleNexttoOrder = () => {
-        cartRouter.push('/checkout')
-     }
+        cartRouter.push('/checkout/' + userID)
+    }
 
     const handleContinueShopping = () => {
         cartRouter.push('/')
-     }
+    }
 
     return (
         <div

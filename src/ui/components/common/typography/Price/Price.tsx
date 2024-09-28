@@ -6,17 +6,21 @@ import { twJoin } from "tailwind-merge";
 export const Price: FC<IPriceProps> = ({
     price,
     discount = 0,
-    size
+    size,
+    orientation
 
 }) => {
     const promotionalPrice = price - price * discount / 100;
     return (
         <div
             className={twJoin(
-                "w-full flex flex-row gap-3 justify-start items-center relative font-semibold px-3",
+                "w-full flex flex-row gap-3 items-center relative font-semibold ",
                 size === "sm" && "text-sm",
                 size === "xl" && "text-xl",
                 size === "3xl" && "text-3xl",
+                orientation === "center" && "justify-center",
+                orientation === "left" && "justify-start text-start", 
+                orientation === "right" && "justify-end text-end",   
             )}
 
         >

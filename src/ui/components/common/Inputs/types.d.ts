@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
-import { FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
 
 export interface IInputFieldProps extends Pick<InputHTMLAttributes<HTMLInputElement>,
  

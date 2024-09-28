@@ -14,9 +14,9 @@ export const CheckoutItemCard: FC<ICheckoutItemCardProps> = ({
                  grid grid-cols-6
                  justify-between items-center 
                  text-light-text dark:text-dark-text
-                 px-3
+                 pl-1
                  `
-                }
+            }
         >
             <h4
                 className="text-xs font-medium col-span-3"
@@ -24,13 +24,17 @@ export const CheckoutItemCard: FC<ICheckoutItemCardProps> = ({
                 {name}
             </h4>
             <h4
-                className="text-sm font-medium col-span-1 content-center"
+                className="text-sm font-medium col-span-1 w-full text-center"
             >
                 {quantity}
             </h4>
-            <Price
-                price={price.price}
-            />
+            <div className="col-span-2 flex w-full relative flex-row justify-start">
+                <Price
+                    price={price.price}
+                    size="sm"
+                    orientation="right"
+                />
+            </div>
         </div>
     )
 }

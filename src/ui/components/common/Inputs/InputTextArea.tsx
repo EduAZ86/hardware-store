@@ -46,7 +46,7 @@ export const InputTextArea: FC<IInputTextAreaProps> = ({
                     resize-none overflow-auto
                     `}
             />
-            <span className="text-light-error text-xs dark:text-dark-error">{errors[name]?.message}</span>
+            <span className="text-light-error text-xs dark:text-dark-error">{errors[name]?.message && typeof errors[name]?.message === 'string' ? errors[name]?.message : ""}</span>
         </div>
     )
 }

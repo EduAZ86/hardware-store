@@ -5,6 +5,7 @@ import { IBasicFormProps } from "./types";
 export const BasicForm: FC<IBasicFormProps> = ({
     children,
     onSubmit,
+    transparent,
     ...otherFormProps
 }) => {
     return (
@@ -17,7 +18,7 @@ export const BasicForm: FC<IBasicFormProps> = ({
             flex flex-col
             justify-center items-center
             p-6 rounded-md overflow-hidden gap-5
-            bg-light-acent dark:bg-dark-acent
+            ${transparent ? "bg-transparent" : "bg-light-acent dark:bg-dark-acent"}            
         `}
         >
             {children}
