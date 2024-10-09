@@ -14,9 +14,7 @@ export const ShowOrderData: FC<IShowOrderDataProps> = ({
         }
         return { key, value };
     }).flat();
-    console.log(keyValueArray);
-
-    return (
+     return (
         <div
             className={`
             w-full h-full
@@ -27,7 +25,7 @@ export const ShowOrderData: FC<IShowOrderDataProps> = ({
         >
             <h3 className="text-dark-text dark:text-light-text text-lg text-center pt-4">Shipping data</h3>
             {keyValueArray?.map((item, index) => (
-                <>
+                <div key={index}>
                     {(
                         item.key === "item" ||
                         item.key === "orderNotes" ||
@@ -47,7 +45,7 @@ export const ShowOrderData: FC<IShowOrderDataProps> = ({
                             <p>{item.value}</p>
                         </div>
                     }
-                </>
+                </div>
             ))}
         </div>
     )

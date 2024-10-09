@@ -9,7 +9,7 @@ type TPayment = {
     paymentStatus: boolean;
 }
 
-type shippingAddress = {
+export type shippingAddress = {
     address: string;
     city: string;
     country: string;
@@ -21,10 +21,10 @@ export interface IOrder {
     userName: string;
     phoneNumber: string;
     email: string;
-    items: ICartItem[];
+    items: ICartItem[] | ICartItemResponse[];
     totalAmount: number;
     shippingData: shippingAddress;
-    orderNotes: string;
+    orderNotes?: string;
     status: TOrderStatus;
     payment?: TPayment;
 }

@@ -1,6 +1,6 @@
 import connectDB from "@/lib/db/db"
 import { errorLogSave } from "@/services/error/errorLogService";
-import { deleteOrderByOrderID, getOrdersByUserID, updateOrderByOrderID } from "@/services/order/order.services";
+import { deleteOrderByOrderID, getOrderByOrderID, updateOrderByOrderID } from "@/services/order/order.services";
 import { IOrder } from "@/types/order.types";
 import { NextRequest, NextResponse } from "next/server"
 
@@ -11,7 +11,7 @@ export const GET = async (req: NextRequest) => {
         if (!orderID) {
             throw new Error('orderID is required');
         }
-        const response = await getOrdersByUserID(orderID);
+        const response = await getOrderByOrderID(orderID);
         return NextResponse.json({ data: response, status: 200 })
     } catch (error: any) {
         await errorLogSave(error)

@@ -3,11 +3,14 @@ import { useSession } from "next-auth/react";
 import { deleteOrder, getOrderByOrderID, getOrdersByUserID, postNewOrder } from "./fetchingOrderData";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { IOrder } from "@/types/order.types";
+import toast from "react-hot-toast";
+
 
 export const useOrderData = () => {
     const session = useSession();
     const id = session.data?.user?.userData?._id as string;
     const orderDataAxiosInstance = createAxiosInstance(true, id);
+
 
     const useGetAllOrders = (userID: string) => {
         const { data: orders, isSuccess, error, refetch, isLoading } = useQuery({
@@ -27,7 +30,7 @@ export const useOrderData = () => {
             queryFn: () => getOrderByOrderID(orderID, orderDataAxiosInstance),
         })
     }
-    const usePostNewOrder =  () => {
+    const usePostNewOrder = () => {
         return useMutation({
             mutationKey: ["order"],
             mutationFn: (newOrder: IOrder) => postNewOrder(newOrder, orderDataAxiosInstance),

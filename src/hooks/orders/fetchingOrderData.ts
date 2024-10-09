@@ -17,7 +17,12 @@ export const getOrdersByUserID = async (userID: string, dataOrdersInstance: Axio
 
 export const getOrderByOrderID = async (orderID: string, dataOrdersInstance: AxiosInstance) => {
     try {
-        const response = await dataOrdersInstance.get(`/orders/${orderID}`)
+        const response = await dataOrdersInstance.get(`/orders/${orderID}`,{
+            params: {
+                orderID: orderID
+            }
+        }
+        )
         return response.data.data as IOrderResponse
     } catch (error) {
         console.log(error);

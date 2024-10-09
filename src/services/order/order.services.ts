@@ -11,11 +11,10 @@ export const getOrdersByUserID = async (userID: string) => {
     return data
 }
 
-export const postNewOrder = async (orderData: IOrder) => {
+export const postNewOrder = async (orderData: IOrder) => {    
     const parsedOrder = OrderSchema.parse(orderData);
     const userObjectID = new mongoose.Types.ObjectId(parsedOrder.userID);
-
-
+    
     const newOrder = new OrderModel({
         userID: userObjectID,
         userName: parsedOrder.userName,
@@ -23,7 +22,7 @@ export const postNewOrder = async (orderData: IOrder) => {
         email: parsedOrder.email,
         items: parsedOrder.items,
         totalAmount: parsedOrder.totalAmount,
-        shippingAddress: parsedOrder.shippingData,
+        shippingData: parsedOrder.shippingData,
         orderNotes: parsedOrder.orderNotes,
         status: parsedOrder.status,
         payment: parsedOrder.payment,
@@ -50,7 +49,6 @@ export const getOrderByOrderID = async (orderID: string) => {
             return itemResponse
         })
     )
-
     const orderResponse: IOrderResponse = {
         _id: orderData._id as string,
         userID: orderData.userID.toString(),
@@ -67,7 +65,6 @@ export const getOrderByOrderID = async (orderID: string) => {
         updatedAt: orderData.updatedAt.toString(),
     }
     return orderResponse
-
 }
 
 export const deleteOrderByOrderID = async (orderID: string) => {
