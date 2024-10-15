@@ -1,3 +1,4 @@
+import { TSortOptions } from "@/types/userInterface.types";
 import { OptionHTMLAttributes, SelectHTMLAttributes } from "react";
 import { FieldErrors, FieldValues } from "react-hook-form";
 import { UseFormRegister } from "react-hook-form";
@@ -5,7 +6,7 @@ import { UseFormRegister } from "react-hook-form";
 
 
 export type TOption = {
-    value: string,
+    value: TSortOptions,
     label: string;
     id: string;
     disabled: boolean;

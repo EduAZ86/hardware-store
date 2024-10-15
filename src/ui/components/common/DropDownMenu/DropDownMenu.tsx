@@ -12,13 +12,14 @@ export const DropDownMenu: FC<IDropDownMenuProps> = ({
         <div
             className={
                 `
-                w-full overflow-hidden
-                absolute left-0 -bottom-0
-                transform ${isHovered ? 'translate-y-3/4 opacity-100 z-10' : '-translate-y-0 opacity-0 -z-10'}
+                w-full 
+                absolute left-0 top-full 
+                transform ${isHovered ? ' opacity-100' : ' opacity-0 '}
                 transition-all duration-500 ease-in-out              
                 shadow-lg
-                rounded-sm
-                p-2
+                rounded-lg
+                overflow-hidden
+                p-2                
             `
             }
         >

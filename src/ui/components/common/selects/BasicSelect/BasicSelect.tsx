@@ -6,10 +6,12 @@ import { BasicOption } from "./BasicOption";
 export const BasicSelect: FC<IBasicSelectProps> = ({
     options,
     title,
-    placeholder
+    placeholder,
+    onChange
 }) => {
     return (
         <select
+            onChange={onChange}
             title={title}
             className={`
                 md:w-fit w-full 

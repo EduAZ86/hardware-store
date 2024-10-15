@@ -29,9 +29,14 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
     matcher: [
+        "/detail/:path*",
+        "/inventary:path*",
+        "/checkout:path*",
+        "/favorites/:path*",
+        "/payment/:path*",
         "/newproduct",
         "/api/products/:path*",
         "/api/orders/:path*",
-        "/api/carts/:path*"
+        "/api/carts/:path*",            
     ]
 }

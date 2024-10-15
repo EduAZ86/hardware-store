@@ -8,7 +8,7 @@ export const getOrdersByUserID = async (userID: string, dataOrdersInstance: Axio
                 userID: userID
             }
         })
-        return response.data.data as IOrderResponse
+        return response.data.data as IOrderResponse[]
     } catch (error) {
         console.log(error);
         throw new Error("Error fetching data");

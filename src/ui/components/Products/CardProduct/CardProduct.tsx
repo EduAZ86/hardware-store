@@ -42,7 +42,7 @@ export const CardProduct: FC<ICardProductProps> = ({
         if (statusSession === "authenticated") {
             udateCartData(_id)
         } else {
-            router.push("/login")
+            router.push("/auth/login")
         }
     }
 
@@ -51,7 +51,7 @@ export const CardProduct: FC<ICardProductProps> = ({
         if (statusSession === "authenticated") {
             addToFav(_id)
         } else {
-            router.push("/login")
+            router.push("/auth/login")
         }
     }
 
@@ -61,7 +61,7 @@ export const CardProduct: FC<ICardProductProps> = ({
     }
 
     const handleDetail = () => {
-        router.push(`/detail/${_id}`);
+        router.push(statusSession === "authenticated" ? `/detail/${_id}` : `/auth/login`);
     }
 
     return (

@@ -7,8 +7,7 @@ import { signOut } from "next-auth/react";
 import ThemeSwitcher from "@/ui/theme/ThemeSwitcher";
 import { ListLI } from "./ListLI";
 export const UserSession: FC<IUserSessionProps> = ({ user }) => {
-    console.log("user", user);
-    
+
     const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
     const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -19,8 +18,7 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
                     h-full
                     display flex flex-row-reverse gap-2
                     relative
-                    justify-center items-start
-                  
+                    justify-center items-start                  
                     group       
                 `}
             onMouseEnter={() => setIsHovered(true)}
@@ -29,8 +27,7 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
             <div
                 className={`
                     md:flex hidden flex-col
-                    justify-around items-center
-                    
+                    justify-around items-center                    
                     `}
             >
                 <Category
@@ -64,8 +61,8 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
             >
                 <ul className="flex flex-col gap-2">
                     {user?.role === "admin" && <ListLI key="addProduct"><Link href={`/inventary`}>Inventary</Link></ListLI>}
-                    <ListLI key="user"><Link href={`/user/${user?.username}`}>configuration</Link></ListLI>
-                    <ListLI key="Logout"><button onClick={() => signOut()}>logout</button></ListLI>
+                    <ListLI key="user"><Link href={`/user/${user?._id}`}>acount</Link></ListLI>
+                    <ListLI key="Logout"><button onClick={() => signOut({ callbackUrl: "/" })}>logout</button></ListLI>
                     <ListLI key="theme">theme: <ThemeSwitcher /></ListLI>
                 </ul>
             </DropDownMenu>

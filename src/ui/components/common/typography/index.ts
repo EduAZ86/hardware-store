@@ -4,3 +4,4 @@ export { Title } from "./Title/Title";
 export { Paragraph } from "./Paragraph/Paragraph";
 export { MainTitle } from "./MainTitle/MainTitle";
 export { Price } from "./Price/Price";
+export { Category } from "./Category/Category"

@@ -4,7 +4,7 @@ import { TOption } from "../Select/types";
 
 
 
-export interface IBasicSelectProps extends Pick<React.SelectHTMLAttributes<HTMLSelectElement>, "title"> {
+export interface IBasicSelectProps extends Pick<React.SelectHTMLAttributes<HTMLSelectElement>, "title" | "onChange"> {
     options: TOption[]
     placeholder: string;
 }

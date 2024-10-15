@@ -1,5 +1,5 @@
 "use client"
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import { ICardControlPanelProps } from "./types";
 import { TypeCardButton } from "./TypeCardButton";
 import { PaginationIndex } from "./PaginationIndex";
@@ -7,34 +7,40 @@ import { TOption } from "../../common/selects/Select/types";
 
 import { faBars, faThLarge, } from "@fortawesome/free-solid-svg-icons";
 import { BasicSelect } from "../../common";
+import { TSortOptions } from "@/types/userInterface.types";
 
 
-export const CardControlPanel: FC<ICardControlPanelProps> = ({ }) => {
+export const CardControlPanel: FC<ICardControlPanelProps> = ({
+    setSortOption
+ }) => {
 
     const sortPriceOption1: TOption = {
         disabled: false,
-        id: "",
-        label: "low to high",
-        value: "up"
+        id: "discount_asc",
+        label: "discount high to low",
+        value: "discount_asc"
     }
     const sortPriceOption2: TOption = {
         disabled: false,
-        id: "",
-        label: "low to high",
-        value: "down"
+        id: "discount_desc",
+        label: "discount low to high",
+        value: "discount_desc"
     }
 
     const sortDiscountOption1: TOption = {
         disabled: false,
-        id: "",
-        label: 'highest to lowest',
-        value: "up"
+        id: "price_asc",
+        label: 'largest to smallest price',
+        value: "price_asc"
     }
     const sortDiscountOption2: TOption = {
         disabled: false,
-        id: "",
-        label: 'smallest to largest',
-        value: "down"
+        id: "price_desc",
+        label: 'smallest to largest price',
+        value: "price_desc"
+    }
+    const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+        setSortOption(e.target.value as TSortOptions);
     }
 
     const handleSelectCardType = () => {
@@ -73,15 +79,12 @@ export const CardControlPanel: FC<ICardControlPanelProps> = ({ }) => {
                 </span>
 
                 <BasicSelect
-                    options={[sortPriceOption1, sortPriceOption2]}
-                    placeholder="price"
+                    options={[sortPriceOption1, sortPriceOption2, sortDiscountOption1, sortDiscountOption2]}
+                    placeholder="date"
                     key={"byPrice"}
+                    onChange={(e) => handleSelect(e)}
                 />
-                <BasicSelect
-                    options={[sortDiscountOption1, sortDiscountOption2]}
-                    placeholder="discount"
-                    key={"byDiscount"}
-                />
+
                 <div
                     className={`w-fit hidden md:flex flex-row justify-center items-center gap-4 px-2`}
                 >

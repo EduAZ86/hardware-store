@@ -7,8 +7,18 @@ import { OrderPartialSchema, OrderSchema } from "./validation.schema";
 
 export const getOrdersByUserID = async (userID: string) => {
     const userObjectID = new mongoose.Types.ObjectId(userID);
-    const data = await OrderModel.find({ userID: userObjectID }).lean();
-    return data
+    const data = await OrderModel.find({ userID: userObjectID });
+    if (!data) {
+        throw new Error('Order not found');
+    }
+    const orderResponse: IOrderResponse[] = await Promise.all(
+        data.map(async (order) => {
+            const orderData = await getOrderByOrderID(order._id as string);
+            return orderData;
+        })
+    )
+    return orderResponse
+    
 }
 
 export const postNewOrder = async (orderData: IOrder) => {    

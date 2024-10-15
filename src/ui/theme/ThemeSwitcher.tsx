@@ -30,15 +30,26 @@ const ThemeSwitcher: React.FC = () => {
         <button
             onClick={() => handleTheme()}
             className={`
-            flex flex-row 
-            w-5
-            justify-center items-center
-            duration-500
-            text-lg
-            text-center        
-        `}>
-            {emogi && <FontAwesomeIcon icon={emogi} />}
+                w-fit h-20 group
+                flex flex-row justify-center items-center gap-4 opacity-90
+            `}
+        >
+            <span
+                className={`
+            w-8 h-8 rounded-full                   
+            border-2 border-light-acent dark:border-dark-acent
+            cursor-pointer
+            flex flex-row justify-center items-center 
+            hover: duration-300 group-hover:border-light-primary dark:group-hover:border-dark-primary               
+        `}
+            >
+                {emogi && <FontAwesomeIcon
+                    icon={emogi}
+                    className="text-md text-center text-light-text dark:text-dark-text"
+                />}
+            </span>
         </button>
+
     )
 }
 

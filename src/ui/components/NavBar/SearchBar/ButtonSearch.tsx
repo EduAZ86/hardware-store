@@ -2,12 +2,16 @@
 import { FC } from "react";
 import { ISearchButtonProps } from "./types";
 import { BackgroundColor } from "../../common";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSearchStore } from "@/lib/store/search/useSearchStore";
 
-export const ButtonSearch: FC<ISearchButtonProps> = ({
-    onClick
+export const ButtonClear: FC<ISearchButtonProps> = ({   
 }) => {
+    const { clearTerm, searchTerm } = useSearchStore()
+    const handleClear = () => {
+        clearTerm()
+    }
     return (
         <button
             className={
@@ -16,21 +20,23 @@ export const ButtonSearch: FC<ISearchButtonProps> = ({
                 group 
                 text-md justify-center
                  items-center 
-                 md:rounded-r-lg rounded-none
-                
-                active:scale-95 z-0 overflow-hidden duration-300`
+                 md:rounded-r-lg rounded-none                
+                active:scale-95 z-0 overflow-hidden duration-300
+                hover:text-light-primary dark:hover:text-dark-primary
+                ${searchTerm === "" ? "hidden" : "visible"}
+                `
             }
-            title="search"
-            onClick={onClick}
+            title="clear"
+            onClick={handleClear}
         >
             <BackgroundColor
-                backgroundColor="secondary"
+                backgroundColor="background"
                 hoverBackgroundColor="text"
                opacity="opacity-100"
                hoverOpacity="opacity-100"
             />
             <FontAwesomeIcon
-                icon={faSearch}
+                icon={faDeleteLeft}
             />
         </button>
     )

@@ -1,3 +1,4 @@
+"use client"
 import { PageContainer } from "@/ui/components/common";
 import { UserPageComponent } from "@/ui/components/User/UserPageComponent";
 import { useParams } from "next/navigation";
@@ -12,3 +13,4 @@ function User() {
         </PageContainer>
     )
 }
+export default User

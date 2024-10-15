@@ -1,6 +1,8 @@
 import connectDB from "@/lib/db/db";
 import { errorLogSave } from "@/services/error/errorLogService";
 import { getProducts, postNewProduct } from "@/services/product/product.services";
+
+import { TSortOptions } from "@/types/userInterface.types";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
@@ -9,10 +11,14 @@ export const GET = async (req: NextRequest) => {
         const { searchParams } = req.nextUrl;
         const lengthPageValue = searchParams.get('lengthPage');
         const offsetValue = searchParams.get('offset');
+        const sortValue = searchParams.get('sort') as TSortOptions;
+        const searchTerm = searchParams.get('searchTerm') as string | undefined;
+
         if (!lengthPageValue || !offsetValue) {
             throw new Error('lengthPage or offset is required');
         }
-        const response = await getProducts(lengthPageValue, offsetValue);
+
+        const response = await getProducts(lengthPageValue, offsetValue, sortValue, searchTerm);
         return NextResponse.json({ data: response, status: 200 })
     } catch (error: any) {
         await errorLogSave(error)

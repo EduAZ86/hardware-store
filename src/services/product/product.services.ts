@@ -1,13 +1,34 @@
 import ProductModel from "@/models/product"
-import { IProduct } from "@/types/product.types"
 import { ProductPartialSchema, ProductSchema } from "./validation.schema"
+import { TSortOptions } from "@/types/userInterface.types"
+import { sortOptions } from "./sortOptions"
+import { IProduct } from "@/types/product.types"
+import { SortOrder } from "mongoose"
 
 
-export const getProducts = async (lengthPage: string, offset: string) => {
-    const data = await ProductModel.find()
+export const getProducts = async (
+    lengthPage: string,
+    offset: string,
+    sortOption?: TSortOptions,
+    searchTerm?: string
+) => {
+    const defaultSort: { [key: string]: SortOrder } = { createdAt: -1 };
+    const sortCriteria = sortOption ? sortOptions[sortOption] : defaultSort;
+    const searchFilter = searchTerm
+        ? {
+            $or: [
+                { name: { $regex: searchTerm, $options: "i" } },
+                { category: { $regex: searchTerm, $options: "i" } },
+                { brand: { $regex: searchTerm, $options: "i" } },
+                { description: { $regex: searchTerm, $options: "i" } }
+            ]
+        }
+        : {};
+
+    const data = await ProductModel.find(searchFilter)
         .skip(Number(offset))
         .limit(Number(lengthPage))
-        .lean()
+        .sort(sortCriteria)
     return data
 }
 
@@ -18,7 +39,6 @@ export const getAllInventary = async () => {
 }
 
 export const postNewProduct = async (productData: IProduct) => {
-    console.log(productData);
     const fonundProductSKU = await ProductModel.findOne({ sku: productData.sku })
     const fonundProductName = await ProductModel.findOne({ name: productData.name })
     if (fonundProductSKU) throw new Error('SKU Product already exists');

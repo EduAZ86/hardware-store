@@ -1,8 +1,9 @@
+import { TSortOptions } from "@/types/userInterface.types";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
 
 export interface ICardControlPanelProps {
-
+    setSortOption: Dispatch<SetStateAction<TSortOptions | undefined>>
 }
 
 export interface IPaginationProps {

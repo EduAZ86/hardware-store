@@ -3,7 +3,6 @@ import { useSession } from "next-auth/react";
 import { deleteOrder, getOrderByOrderID, getOrdersByUserID, postNewOrder } from "./fetchingOrderData";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { IOrder } from "@/types/order.types";
-import toast from "react-hot-toast";
 
 
 export const useOrderData = () => {
@@ -12,17 +11,11 @@ export const useOrderData = () => {
     const orderDataAxiosInstance = createAxiosInstance(true, id);
 
 
-    const useGetAllOrders = (userID: string) => {
-        const { data: orders, isSuccess, error, refetch, isLoading } = useQuery({
+    const useGetAllOrders = (userID: string) => {      
+        return useQuery({
             queryKey: ["orders"],
             queryFn: () => getOrdersByUserID(userID, orderDataAxiosInstance),
         })
-        return {
-            orders,
-            isSuccess,
-            error,
-            refetch,
-        }
     }
     const useGetOrderByOrderID = (orderID: string) => {
         return useQuery({
