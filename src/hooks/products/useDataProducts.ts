@@ -47,7 +47,7 @@ export const useDataProducts = () => {
 
     const useGetAllProducts = (sortOption?: TSortOptions, searchTerm?: string) => {
         return useInfiniteQuery({
-            queryKey: ["products"],
+            queryKey: ["dataProducts"],
             queryFn: ({ pageParam = 0 }) => getAllProducts({
                 pageParam: pageParam,
                 LENGTHPAGE: LENGTHPAGE,
@@ -59,7 +59,6 @@ export const useDataProducts = () => {
             initialPageParam: 0,
         });
     };
-
 
     const useGetAllInventary = () => {
         return useQuery({

@@ -14,10 +14,13 @@ export const UserPageComponent: FC<IUserPageComponentProps> = ({
     userID
 }) => {
     const router = useRouter()
-    const { data: userData, isLoading, error: errorDataUSer } = useDataUser().useGetUserByID(userID);
+    const {
+        data: userData,
+        isLoading,
+        error: errorDataUSer
+    } = useDataUser().useGetUserByID(userID);
     const [currentOption, setCurrentOption] = useState<optionButtonSelect>("account")
     if (errorDataUSer) {
-        console.log("error", errorDataUSer)
         toast.error(errorDataUSer.message, {
             duration: 4000
         })
@@ -29,7 +32,13 @@ export const UserPageComponent: FC<IUserPageComponentProps> = ({
         }
     }
     return (
-        <div className="w-full h-[80vh] flex flex-col px-6 relative">
+        <div className={`
+        w-full h-full 
+        min-h-[calc(100vh-88px)] 
+        flex flex-col 
+        md:px-6 px-2 
+        relative
+        `}>
             {isLoading
                 ?
                 <Loader />
@@ -39,10 +48,14 @@ export const UserPageComponent: FC<IUserPageComponentProps> = ({
                         ?
                         <div className={`
                                 w-full h-full                                
-                                grid grid-cols-4
+                                grid 
+                                md:grid-cols-4
+                                md:grid-rows-1
+                                grid-rows-auto
+                                grid-cols-1
                                 relative
-                                p-4
-                                gap-4       
+                                md:p-4 p-2
+                                gap-4
                             `}>
                             <ProfileCard
                                 userName={userData?.username}
@@ -52,11 +65,15 @@ export const UserPageComponent: FC<IUserPageComponentProps> = ({
                                 currentSelected={currentOption}
                             />
                             <div
-                                className="h-full col-span-3 flex flex-col 
+                                className={`
+                                    h-full 
+                                    md:col-span-3
+                                    col-span-1 
+                                    flex flex-col 
                                     rounded-lg
                                     border-2 border-light-acent
                                     dark:border-dark-acent
-                                    "
+                                    `}
                             >
                                 {currentOption === "account" && <AcountDataForm currentUserData={userData} />}
                                 {currentOption === "cart" && <div className="max-h-[80vh] overflow-y-scroll"><CartComponent userID={userID} /></div>}
@@ -64,7 +81,6 @@ export const UserPageComponent: FC<IUserPageComponentProps> = ({
                             </div>
                         </div>
                         :
-
                         <Toaster />
                     }
 

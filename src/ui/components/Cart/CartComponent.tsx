@@ -36,21 +36,31 @@ export const CartComponent: FC<ICartProps> = ({
     return (
         <div
             className={`
-              w-full h-full relative flex flex-col px-4   
+              w-full h-full relative 
+              flex flex-col 
+              md:px-8 px-2
+            
+            
             `}
         >
             <MainTitle text="Cart" />
             <div
                 className={`
-                        w-full h-10 relative grid grid-cols-5
+                        w-full h-10 
+                        relative 
+                        md:grid grid-cols-5
                         text-light-text dark:text-dark-text
-                        text-lg font-semibold 
+                         md:text-lg text-xs 
+                        font-semibold
+                        md:visible hidden
+                        px-2
+                        gap-4 
                     `}
             >
-                <h3 key="product" className="col-span-2">PRODUCT</h3>
-                <h3 key="price" className="col-span-1">PRICE</h3>
-                <h3 key="quantity" className="col-span-1">QUANTITY</h3>
-                <h3 key="total" className="col-span-1">TOTAL</h3>
+                <h3 key="product" className="col-span-2 ">PRODUCT</h3>
+                <h3 key="price" className="text-center col-span-1">PRICE</h3>
+                <h3 key="quantity" className=" text-end col-span-1 pr-4">QUANTITY</h3>
+                <h3 key="total" className="w-full col-span-1 text-end">TOTAL</h3>
             </div>
             <div className="w-full h-full relative" title="content">
                 {isLoading
@@ -75,14 +85,17 @@ export const CartComponent: FC<ICartProps> = ({
                         </div>
                         <div
                             className={`
-                            w-full h-fit relative grid grid-cols-5
+                            w-full h-fit relative 
+                            grid 
+                            md:grid-cols-5
+                            grid-cols-1
                             text-light-text dark:text-dark-text
                             text-lg font-semibold 
                             `}
                         >
-                            <span key="product" className="col-span-3"></span>
+                            <span key="product" className="col-span-3 hidden md:visible md:flex"></span>
                             <div
-                                className=" w-full col-span-2 flex flex-col gap-4"
+                                className=" w-full md:col-span-2  flex flex-col gap-4"
                             >
                                 <div key="price"
                                     className={`

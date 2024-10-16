@@ -1,6 +1,6 @@
-import { IProductResponse } from "@/types/product.types";
-import { TSortOptions } from "@/types/userInterface.types";
 import { AxiosInstance } from "axios";
+import { TSortOptions } from "@/types/userInterface.types";
+import { IProductResponse, IProductResults } from "@/types/product.types";
 
 export interface IGetAllProducts {
     pageParam: number;
@@ -19,9 +19,13 @@ export const getAllProducts = async ({ pageParam, LENGTHPAGE, dataProductsInstan
             searchTerm: searchTerm
         }
     });
-    return {
-        data: response.data.data as IProductResponse[],
+    const productResponse: IProductResults = {
+        data: response.data.data.data as IProductResponse[],
+        totalResults: response.data.data.totalResults,
+        lengthPage: LENGTHPAGE,
+        totalPages: response.data.data.totalPages,
         nextPage: pageParam + 1,
         isLastPage: response.data.data.length < LENGTHPAGE,
-    };
+    }
+    return productResponse
 }

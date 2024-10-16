@@ -30,7 +30,7 @@ const ThemeSwitcher: React.FC = () => {
         <button
             onClick={() => handleTheme()}
             className={`
-                w-fit h-20 group
+                w-fit h-fit group
                 flex flex-row justify-center items-center gap-4 opacity-90
             `}
         >

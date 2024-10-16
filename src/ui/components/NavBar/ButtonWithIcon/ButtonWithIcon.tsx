@@ -9,7 +9,7 @@ export const ButtonWithIcon: FC<IButtonWithIconProps> = ({ icon, text, href }) =
         <Link
             href={href}
             className={`
-                    w-fit h-20 group
+                    w-full h-20 group
                     flex flex-row justify-center items-center gap-4 opacity-90
                 `}
         >
@@ -28,10 +28,9 @@ export const ButtonWithIcon: FC<IButtonWithIconProps> = ({ icon, text, href }) =
                 />
             </span>
             <div
-                className="opacity-0  group-hover:opacity-95"
+                className="opacity-0  group-hover:opacity-95 md:flex hidden"
             >
                 <Category text={text} />
-
             </div>
         </Link>
     )

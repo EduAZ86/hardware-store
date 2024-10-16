@@ -7,8 +7,8 @@ import { SortOrder } from "mongoose"
 
 
 export const getProducts = async (
-    lengthPage: string,
-    offset: string,
+    lengthPage: number,
+    offset: number,
     sortOption?: TSortOptions,
     searchTerm?: string
 ) => {
@@ -25,11 +25,19 @@ export const getProducts = async (
         }
         : {};
 
+    const totalResults = await ProductModel.countDocuments(searchFilter)
+
     const data = await ProductModel.find(searchFilter)
-        .skip(Number(offset))
-        .limit(Number(lengthPage))
+        .skip(offset)
+        .limit(lengthPage)
         .sort(sortCriteria)
-    return data
+
+    return {
+        data: data,
+        totalResults,
+        lengthPage: lengthPage,
+        totalPages: Math.ceil(totalResults / lengthPage),
+    }
 }
 
 export const getAllInventary = async () => {

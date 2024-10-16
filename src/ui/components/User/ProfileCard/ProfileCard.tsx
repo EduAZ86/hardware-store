@@ -31,7 +31,7 @@ export const ProfileCard: FC<IProfileCardProps> = ({
                     gap-6
                     justify-center items-center
                     pt-4 pb-8
-                    border-b-2 border-light-acent
+                    md:border-b-2 border-light-acent
                     dark:border-dark-acent
                     "
             >
@@ -39,7 +39,8 @@ export const ProfileCard: FC<IProfileCardProps> = ({
                     src={imageProfile}
                     alt="profile"
                     className="
-                        w-32 h-32
+                        md:w-32 md:h-32
+                        w-20 h-20
                         rounded-full
                         border-2
                         border-light-primary
@@ -49,7 +50,15 @@ export const ProfileCard: FC<IProfileCardProps> = ({
                 <CardTitle key="userName" text={userName} />
                 <span className="text-xs text-light-text dark:text-dark-text font-light opacity-70">{email}</span>
             </div>
-            <div className="w-full h-full flex flex-col justify-start pt-8 pb-4 gap-4">
+            <div className={`
+                w-full h-full 
+                flex 
+                md:flex-col flex-row 
+                md:justify-start justify-center
+                md:items-start items-center 
+                md:pt-8  
+                pb-4 gap-4
+                `}>
                 <ButtonIconAndText
                     key={"Account"}
                     icon={faUser}

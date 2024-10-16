@@ -15,7 +15,7 @@ export const BasicSelect: FC<IBasicSelectProps> = ({
             title={title}
             className={`
                 md:w-fit w-full 
-                px-4
+                pl-2
                 md:h-10 h-8
                 md:rounded-l-lg rounded-none
                 cursor-pointer

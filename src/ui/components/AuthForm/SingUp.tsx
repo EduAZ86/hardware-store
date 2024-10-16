@@ -1,17 +1,17 @@
 "use client"
 import { FC } from "react";
-import { ISingUpProps } from "./types";
-import { Title } from "../common/typography";
-import { BackgroundColor, ButtonWithText } from "../common";
-import { InputAuth } from "./InputAuth/InputAuth";
-import { useForm } from "react-hook-form";
 import { AuthForm } from "./AuthForm";
 import { SingLink } from "./SingLink";
-import { signIn, useSession } from "next-auth/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { validationUserSchema } from "./validationUserSchema";
+import { ISingUpProps } from "./types";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { Title } from "../common/typography";
 import { INewUser } from "@/types/user.types";
+import { InputAuth } from "./InputAuth/InputAuth";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { userRegister } from "@/lib/fetching/fechUsers";
+import { BackgroundColor, ButtonWithText } from "../common";
+import { validationUserSchema } from "./validationUserSchema";
 
 export const SingUp: FC<ISingUpProps> = () => {
 
@@ -40,9 +40,12 @@ export const SingUp: FC<ISingUpProps> = () => {
     return (
         <div
             className={`
+                relative
                 w-full h-full
                 flex flex-col
-                items-center justify-center gap-2                
+                items-center 
+                justify-center
+                 gap-2                
             `}
         >
             <Title text="Register" />

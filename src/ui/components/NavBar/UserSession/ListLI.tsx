@@ -14,6 +14,7 @@ export const ListLI: FC<IListLIProps> = ({ children }) => {
                 cursor-pointer
                 hover:text-light-acent hover:dark:text-dark-acent
                 flex flex-row gap-2
+                items-center
             `}
         >
             {children}

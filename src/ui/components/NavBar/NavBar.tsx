@@ -1,15 +1,14 @@
 "use client"
 import { FC } from "react";
-import Link from "next/link";
 import { INavBarProps } from "./types";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import { Cart } from "./CartButton/CartButton";
 import { SearchBar } from "./SearchBar/SearchBar";
 import ThemeSwitcher from "@/ui/theme/ThemeSwitcher";
 import { UserSession } from "./UserSession/UserSession";
 import { ButtonWithIcon } from "./ButtonWithIcon/ButtonWithIcon";
 import { faHeart, faHome, faSignIn } from "@fortawesome/free-solid-svg-icons";
-import { usePathname } from "next/navigation";
 
 export const NavBar: FC<INavBarProps> = ({
 }) => {
@@ -21,7 +20,8 @@ export const NavBar: FC<INavBarProps> = ({
     return (
         <div
             className={`
-                w-full h-fit flex flex-col
+                w-full h-fit 
+                flex flex-col
                 bg-gradient-to-r from-light-primary to-light-secondary
                 dark:bg-gradient-to-r dark:from-dark-primary dark:to-dark-secondary relative
                 z-10
@@ -30,7 +30,7 @@ export const NavBar: FC<INavBarProps> = ({
             <div className={`
                 relative flex
                 flex-row
-                md:justify-around justify-start
+                justify-center
                 md:px-2 px-2
                 items-center            
                 w-full h-fit
@@ -40,15 +40,20 @@ export const NavBar: FC<INavBarProps> = ({
                     <SearchBar />
                 }
             </div>
-            <div className="w-full h-fit flex justify-center items-center pb-2 gap-4 opacity-90">
+            <div className={`
+                w-full 
+                h-fit 
+                grid                 
+                ${status === "authenticated" ? "grid-cols-4" : "grid-cols-3"}  
+                px-20 gap-4 
+                opacity-90`
+            }>
                 {status === "authenticated" &&
-
                     <ButtonWithIcon
                         key={"fav"}
                         icon={faHeart}
                         href={favoritesUrl}
                         text="Favorites"
-
                     />
                 }
                 <ButtonWithIcon
@@ -58,24 +63,30 @@ export const NavBar: FC<INavBarProps> = ({
                     text="Home"
                 />
                 {status === "authenticated" &&
-                    <div className=" h-full relative flex flex-row justify-center items-start gap-2 pt-4 ">
+                    <>
                         <Cart
                             userID={user?._id as string}
                         />
                         <UserSession user={user} />
-                    </div>
+
+                    </>
+
                 }
                 {status === "unauthenticated" &&
-                    <div className="relative flex flex-row gap-4 ">
-                        <ButtonWithIcon
-                            key={"login"}
-                            icon={faSignIn}
-                            href={"/auth/login"}
-                            text="Login"
-                        />
+
+                    <ButtonWithIcon
+                        key={"login"}
+                        icon={faSignIn}
+                        href={"/auth/login"}
+                        text="Login"
+                    />}
+                {status === "unauthenticated" &&
+                    <div className="w-full col-span-1 flex justify-center items-center">
                         <ThemeSwitcher />
                     </div>
                 }
+
+
             </div>
         </div>
     )

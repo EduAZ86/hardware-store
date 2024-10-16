@@ -54,3 +54,12 @@ export interface IProductResponse extends IProduct {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface IProductResults {
+    data: IProductResponse[]
+    totalResults: number,
+    lengthPage: number,
+    totalPages: number,
+    nextPage: number,
+    isLastPage: boolean
+}

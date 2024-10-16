@@ -57,7 +57,7 @@ export const AcountDataForm: FC<IAcountDataFormProps> = ({
                 onSubmit={onSubmit}
                 name="accountDataForm"
             >
-                <div className="grid grid-cols-3 grid-rows-2 gap-4 ">
+                <div className="grid md:grid-cols-3 grid-cols-1 grid-rows-2 gap-4 ">
                     <div className=" flex flex-col row-span-2 justify-center items-center gap">
                         <img
                             src={watch("picture")}

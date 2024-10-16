@@ -23,11 +23,13 @@ export const Cart: FC<ICartNavBarProps> = ({
     return (
         <div
             className={`
-                md:w-48 w-20
+                md:w-48 
                  h-full
-                display flex flex-row-reverse gap-2
+                display flex 
+                flex-row-reverse 
+                gap-2
                 relative
-                justify-evenly items-start             
+                justify-center items-center           
                 group       
             `}
             onMouseEnter={() => setIsHovered(true)}
@@ -41,14 +43,7 @@ export const Cart: FC<ICartNavBarProps> = ({
                 
                 `}
             >
-                <span
-                    className={`
-                        text-xs text-center
-                        text-light-text dark:text-dark-text
-                        group-hover:text-light-primary group-hover:dark:text-dark-primary
-                    `}
-                >
-                </span>
+           
                 <Category
                     text="Cart"
                 />
@@ -83,7 +78,7 @@ export const Cart: FC<ICartNavBarProps> = ({
                             className="flex flex-row justify-around gap-2 text-light-text dark:text-dark-text overflow-hidden"
                         >
                             <span className="text-sm">{product.quantity}</span>
-                            <img src={product.image} className="w-6 h-6"/>
+                            <img src={product.image} className="w-6 h-6" />
                             <span className="text-xs truncate">{product.name}</span>
                         </li>
                     ))}

@@ -11,8 +11,10 @@ import { TSortOptions } from "@/types/userInterface.types";
 
 
 export const CardControlPanel: FC<ICardControlPanelProps> = ({
-    setSortOption
- }) => {
+    setSortOption,
+    totalResults,
+    currentResultsShown
+}) => {
 
     const sortPriceOption1: TOption = {
         disabled: false,
@@ -55,7 +57,8 @@ export const CardControlPanel: FC<ICardControlPanelProps> = ({
                 py-3
                 relative
                 z-0
-                flex flex-row
+                flex 
+               md:flex-row flex-col 
                 flex-wrap
                 items-center
                 justify-around
@@ -63,17 +66,18 @@ export const CardControlPanel: FC<ICardControlPanelProps> = ({
             `}
         >
             <PaginationIndex
-                currentStartPage={2}
-                lengthPage={20}
-                lengthResults={450}
+                currentStartPage={currentResultsShown}
+                lengthResults={totalResults}
             />
             <div
                 className={`
-                    flex flex-row relative items-center gap-3
+               
+                    flex flex-col relative items-center gap-3
+                    md:flex-row
                 `}
             >
                 <span
-                    className="text-sm text-start text-light-text dark:text-dark-text"
+                    className="md:visible hidden text-sm text-start text-light-text dark:text-dark-text"
                 >
                     Sort by
                 </span>

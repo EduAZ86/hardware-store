@@ -12,10 +12,9 @@ export const ButtonIconAndText: FC<IButtonIconAndTextProps> = ({
     return (
         <button
             onClick={onClick}
-            className={twJoin(
-                `
-                    w-full h-fit flex flex-row gap-4 items-center
-                   
+            className={twJoin(                `
+                    w-full h-fit flex flex-row gap-4 items-center 
+                    justify-center md:justify-start                  
                     hover:text-light-acent dark:hover:text-dark-acent
                     active:scale-95
                     `
@@ -29,7 +28,8 @@ export const ButtonIconAndText: FC<IButtonIconAndTextProps> = ({
                 className=" text-md"
             />
             <h4
-                className="                   
+                className="
+                    md:flex hidden                   
                     font-semibold
                     text-sm
                     "

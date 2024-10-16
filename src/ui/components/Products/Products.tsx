@@ -13,20 +13,32 @@ export const Products: FC<IProductsProps> = ({ }) => {
     const { useGetAllProducts } = useDataProducts()
     const [sortOption, setSortOption] = useState<TSortOptions | undefined>(undefined)
     const { searchTerm } = useSearchStore()
-    const { data: dataProducts, refetch: refetchProducts } = useGetAllProducts(sortOption, searchTerm)
+    const {
+        data: dataProducts,
+        refetch: refetchProducts,
+    } = useGetAllProducts(sortOption, searchTerm);
 
     useEffect(() => {
         refetchProducts()
     }, [sortOption, searchTerm])
+
+    const currentResultsShown = dataProducts
+        ? dataProducts.pages.reduce((total, page) => total + page.data.length, 0)
+        : 0;
+
     return (
         <div>
             <Title text="Products" />
             <CardControlPanel
                 setSortOption={setSortOption}
+                totalResults={dataProducts?.pages[0].totalResults || 0}
+                currentResultsShown={currentResultsShown}
             />
-            <ProductList
-                products={dataProducts ? dataProducts?.pages[0].data : []}
-            />
+            {dataProducts &&
+                <ProductList
+                    products={dataProducts.pages.map((page) => page.data).flat()}
+                />
+            }
         </div>
     )
 }

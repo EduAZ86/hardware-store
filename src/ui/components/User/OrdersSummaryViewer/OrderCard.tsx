@@ -11,6 +11,16 @@ export const OrderCard: FC<IOrderCardProps> = ({
     order
 }) => {
 
+    const date = new Date(order.createdAt as string);
+    const formatedDate = date.toLocaleDateString('es-AR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      
+        hour: 'numeric',
+        minute: 'numeric',
+      });
+
     return (
         <div className={`
             w-full 
@@ -21,10 +31,10 @@ export const OrderCard: FC<IOrderCardProps> = ({
             rounded-lg        
             border-light-acent dark:border-dark-acent 
         `}>
-            <div className="grid grid-cols-2 h-fit w-full">
+            <div className="grid md:grid-cols-2 grid-cols-1 md:h-fit h-full w-full">
                 <LavelAndValue key={"User Name"} label={"User Name"} value={order.userName} />
                 <LavelAndValue key={"orderID"} label={"Order ID"} value={order._id} />
-                <LavelAndValue key={"createdAt"} label={"Date"} value={order.createdAt} />
+                <LavelAndValue key={"createdAt"} label={"Date"} value={formatedDate} />
                 <LavelAndValue key={"address"} label={"Address"} value={order.shippingData?.address} />
                 <LavelAndValue key={"city"} label={"City"} value={order.shippingData?.city} />
                 <LavelAndValue key={"country"} label={"Country"} value={order.shippingData?.country} />

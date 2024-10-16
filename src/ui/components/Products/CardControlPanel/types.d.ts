@@ -4,11 +4,12 @@ import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
 
 export interface ICardControlPanelProps {
     setSortOption: Dispatch<SetStateAction<TSortOptions | undefined>>
+    totalResults: number;
+    currentResultsShown: number;
 }
 
 export interface IPaginationProps {
     currentStartPage: number;
-    lengthPage: number;
     lengthResults: number;
 }
 

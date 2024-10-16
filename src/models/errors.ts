@@ -1,7 +1,9 @@
 import { IErrorLog } from "@/services/error/types";
-import { Model, Schema, model, models } from "mongoose";
+import { Document, Model, Schema, model, models } from "mongoose";
 
-const ErrorLogSchema: Schema = new Schema({
+interface IErrorLogDocument extends IErrorLog, Document { }
+
+const ErrorLogSchema: Schema<IErrorLogDocument> = new Schema<IErrorLogDocument>({
     message: {
         type: String,
         required: true
@@ -32,6 +34,6 @@ const ErrorLogSchema: Schema = new Schema({
     }
 });
 
-const ErrorLogModel: Model<IErrorLog> = models.ErrorLog || model<IErrorLog>('ErrorLog', ErrorLogSchema);
+const ErrorLogModel: Model<IErrorLogDocument> = models?.ErrorLog || model<IErrorLogDocument>('ErrorLog', ErrorLogSchema);
 
 export default ErrorLogModel;

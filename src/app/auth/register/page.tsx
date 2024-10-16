@@ -4,7 +4,7 @@ import { BackgroundColor } from "@/ui/components/common";
 function Register() {
     return (
         <main
-            className="w-full h-full relative flex-col z-0 py-3"
+            className="w-full h-[calc(100vh-88px)] relative flex-col z-0 py-3"
         >
             <BackgroundColor
                 backgroundColor="background"

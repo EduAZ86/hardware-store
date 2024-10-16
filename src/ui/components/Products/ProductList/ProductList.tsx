@@ -9,8 +9,15 @@ export const ProductList: FC<IListProductProps> = ({
         <div
             className={`
                 w-full h-fit
-                flex flex-row flex-wrap
-                items-start gap-4 p-2
+                grid 
+                sm:grid-cols-1
+                md:grid-cols-3
+                lg:grid-cols-4
+                xl:grid-cols-5
+                2xl:grid-cols-6
+                items-center
+                justify-items-center                
+                gap-4 p-2
             `}
         >
             {products.map((product, index) => {

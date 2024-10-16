@@ -14,9 +14,7 @@ export const DropDownMenu: FC<IDropDownMenuProps> = ({
                 `
                 w-full 
                 absolute left-0 top-full 
-                transform ${isHovered ? ' opacity-100' : ' opacity-0 '}
-                transition-all duration-500 ease-in-out              
-                shadow-lg
+                ${isHovered ? 'md:block hidden' : ' hidden'}  
                 rounded-lg
                 overflow-hidden
                 p-2                

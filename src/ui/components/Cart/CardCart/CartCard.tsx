@@ -18,18 +18,34 @@ export const CartCard: FC<ICartCardProps> = ({
     }
     return (
         <div
-            className="
-                w-full h-fit grid grid-cols-5 items-center relative "
+            className={
+                `w-full h-fit 
+                grid 
+                md:grid-cols-5
+                grid-cols-2 
+                items-center relative gap-2
+                border-2 border-light-acent dark:border-dark-acent
+                rounded-lg
+                p-2
+                `}
         >
-            <div className=" col-span-2 flex flex-row">
+            <div className=" col-span-2 flex flex-row gap-2 md:px-2 px-1">
                 <img
                     src={item.image}
                     className="w-24 h-24 object-cover"
                 />
-                <CardTitle text={item.name} />
+                <CardTitle horientation="left" text={item.name} key={"name"} />
             </div>
-            <Price key={"price"} price={product ? product.price.price : 0} discount={product ? product.price.percentageDiscount : 0} />
-            <div className="col-span-1 flex w-full justify-center items-center opacity-80">
+            <div className="col-span-1 md:flex hidden">
+                <Price key={"price"} price={product ? product.price.price : 0} discount={product ? product.price.percentageDiscount : 0} />
+            </div>
+            <div className={`
+                w-full 
+                col-span-1 
+                flex felx-row 
+                md:justify-end justify-start 
+                items-center opacity-80
+                `}>
                 <div
                     className="w-fit h-12 flex px-2 relative flex-row justify-center items-center gap-2 rounded-r-full rounded-l-full overflow-hidden p-1 "
                 >
@@ -58,7 +74,9 @@ export const CartCard: FC<ICartCardProps> = ({
                     />
                 </div>
             </div>
-            <Price key={"subtotal"} price={product ? (product.price.price - product.price.price * product.price.percentageDiscount / 100) * quantity : 0} discount={0} />
+            <div className="col-span-1">
+                <Price key={"subtotal"} orientation="right" price={product ? (product.price.price - product.price.price * product.price.percentageDiscount / 100) * quantity : 0} discount={0} />
+            </div>
         </div>
     )
 }

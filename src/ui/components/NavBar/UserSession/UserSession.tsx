@@ -14,11 +14,11 @@ export const UserSession: FC<IUserSessionProps> = ({ user }) => {
     return (
         <div
             className={`                    
-                    md:w-40 w-20
+                    w-full
                     h-full
                     display flex flex-row-reverse gap-2
                     relative
-                    justify-center items-start                  
+                    justify-center items-center                  
                     group       
                 `}
             onMouseEnter={() => setIsHovered(true)}
