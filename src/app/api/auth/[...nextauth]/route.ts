@@ -10,7 +10,7 @@ import { checkUser, getUser, loginUser, registerUser } from "@/services/auth/aut
 import { AuthOptions } from "next-auth";
 
 
-export const authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
