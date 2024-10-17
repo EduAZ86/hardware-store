@@ -7,9 +7,8 @@ export const SearchBar: FC<ISearchBarProps> = ({ }) => {
     return (
         <div
             className={`
-                md:w-2/3 w-2/3 
-                h-10
-                mt-4 
+                w-2/3 
+                h-10               
                 flex 
                 flex-row 
                 justify-center 

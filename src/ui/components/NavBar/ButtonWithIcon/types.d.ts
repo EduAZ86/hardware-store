@@ -4,4 +4,5 @@ export interface IButtonWithIconProps {
     icon: IconProp;
     text: string;
     href: string;
+    onClick?: () => void;
 }

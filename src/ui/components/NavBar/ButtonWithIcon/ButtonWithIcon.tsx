@@ -4,12 +4,17 @@ import { Category } from "../../common"
 import { IButtonWithIconProps } from "./types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-export const ButtonWithIcon: FC<IButtonWithIconProps> = ({ icon, text, href }) => {
+export const ButtonWithIcon: FC<IButtonWithIconProps> = ({ icon,
+    text,
+    href,
+    onClick
+}) => {
     return (
         <Link
             href={href}
+            onClick={onClick}
             className={`
-                    w-full h-20 group
+                    w-full  group
                     flex flex-row justify-center items-center gap-4 opacity-90
                 `}
         >

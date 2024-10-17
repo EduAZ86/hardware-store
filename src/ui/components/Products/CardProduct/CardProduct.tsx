@@ -69,7 +69,7 @@ export const CardProduct: FC<ICardProductProps> = ({
             className={twJoin(
                 "w-56 h-96 flex flex-col relative z-0 px-3 py-2 rounded-md gap-2 overflow-hidden border-solid border-2 border-transparent",
                 "group hover:border-light-primary dark:hover:border-dark-primary",
-                "cursor-pointer active:scale-[99%] duration-300"
+                "cursor-pointer active:scale-[99%] duration-300",              
             )}
             onMouseEnter={handleFocus}
             onMouseLeave={handleBlur}
@@ -121,9 +121,12 @@ export const CardProduct: FC<ICardProductProps> = ({
                     <Category text={category} />
                     <CardTitle text={name} />
                 </div>
-                <Price price={price} discount={percentageDiscount} />
+                <Price price={price} discount={percentageDiscount} size="sm" />
             </div>
-            <BackgroundColor backgroundColor="background" />
+            <BackgroundColor 
+            backgroundColor="background"            
+            customClassName="brightness-75 opacity-10 dark:brightness-75 dark:opacity-25"  
+            />
         </div>
     )
 }

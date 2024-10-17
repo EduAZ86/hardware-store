@@ -34,7 +34,7 @@ const config: Config = {
         light: {
           'primary': '#5082EE',
           'secondary': '#D46779',
-          'background': '#222831',
+          'background': '#FFFFFF',
           'acent': '#C6C6C6',
           'text': '#0A0C0C',
           'error': '#F44336'

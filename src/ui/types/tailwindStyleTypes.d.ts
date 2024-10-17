@@ -259,7 +259,7 @@ export type TBlur =
 export type TBrightness =
     | "brightness-0"
     | "brightness-50"
-    | "brightness-75r"
+    | "brightness-75"
     | "brightness-100"
     | "brightness-150"
     | "brightness-200";

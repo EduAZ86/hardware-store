@@ -6,8 +6,9 @@ export const BackgroundColor: FC<IBackgroundColorProps> = ({
     backgroundColor,
     hoverBackgroundColor,
     opacity,
-    hoverOpacity
-
+    hoverOpacity,
+    brigness,
+    customClassName
 }) => {
     return (
         <span
@@ -33,6 +34,8 @@ export const BackgroundColor: FC<IBackgroundColorProps> = ({
                 hoverOpacity === 'opacity-75' && 'group-hover:opacity-75',
                 hoverOpacity === 'opacity-100' && 'group-hover:opacity-100',
                 opacity && opacity,
+                brigness && brigness,
+                customClassName && customClassName
             )}
         />
     )

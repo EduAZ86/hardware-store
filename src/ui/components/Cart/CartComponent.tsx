@@ -38,8 +38,7 @@ export const CartComponent: FC<ICartProps> = ({
             className={`
               w-full h-full relative 
               flex flex-col 
-              md:px-8 px-2
-            
+              md:px-8 px-2         
             
             `}
         >

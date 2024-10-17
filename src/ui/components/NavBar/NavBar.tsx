@@ -22,20 +22,32 @@ export const NavBar: FC<INavBarProps> = ({
             className={`
                 w-full h-fit 
                 flex flex-col
-                bg-gradient-to-r from-light-primary to-light-secondary
-                dark:bg-gradient-to-r dark:from-dark-primary dark:to-dark-secondary relative
+                bg-light-primary dark:bg-dark-primary
+                relative
                 z-10
+                pb-2
                 `}
         >
             <div className={`
                 relative flex
                 flex-row
                 justify-center
-                md:px-2 px-2
                 items-center            
-                w-full h-fit
+                md:px-2 px-2
+                w-full h-20
                 gap-2
                 `}>
+                <img
+                    src="/dark.png"
+                    alt="light"
+                    className="h-16 dark:hidden block"
+                />
+
+                <img
+                    src="/light.png"
+                    alt="dark"
+                    className="h-16 dark:block hidden"
+                />
                 {currentUrl === "/" &&
                     <SearchBar />
                 }

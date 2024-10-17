@@ -76,7 +76,7 @@ export const UserPageComponent: FC<IUserPageComponentProps> = ({
                                     `}
                             >
                                 {currentOption === "account" && <AcountDataForm currentUserData={userData} />}
-                                {currentOption === "cart" && <div className="max-h-[80vh] overflow-y-scroll"><CartComponent userID={userID} /></div>}
+                                {currentOption === "cart" && <div className="max-h-[80vh] overflow-y-scroll mb-2"><CartComponent userID={userID} /></div>}
                                 {currentOption === "orders" && <OrdersSummaryViewer userID={userID} />}
                             </div>
                         </div>

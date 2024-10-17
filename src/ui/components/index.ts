@@ -6,3 +6,4 @@ export { ProductsInventary } from "./Inventary/Inventary";
 export { CartComponent } from "./Cart/CartComponent";
 export { CheckoutComponent } from "./Checkout/Checkout";
 export { MercadopagoCheckoutPro } from "./Mercadopago/MercadopagoCheckoutPro";
+export { Footer } from "./Footer/Footer";
