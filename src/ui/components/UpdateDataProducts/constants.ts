@@ -2,11 +2,12 @@
 import { ECategory, } from "@/types/product.types.d";
 import { TOption } from "../common/selects/Select/types";
 
+
 export const productCategories: ECategory[] = Object.values(ECategory)
 
 export const categoryOptions: TOption[] = productCategories.map((category) => ({
-    value: category,
-    label: category,
+    value: category.toString(),
+    label: category.toString(),
     id: category,
     disabled: false
 }));

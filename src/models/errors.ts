@@ -6,11 +6,11 @@ interface IErrorLogDocument extends IErrorLog, Document { }
 const ErrorLogSchema: Schema<IErrorLogDocument> = new Schema<IErrorLogDocument>({
     message: {
         type: String,
-        required: true
+  
     },
     stack: {
         type: String,
-        required: true
+    
     },
     context: {
         type: String
@@ -18,13 +18,13 @@ const ErrorLogSchema: Schema<IErrorLogDocument> = new Schema<IErrorLogDocument>(
     timestamp: {
         type: Date,
         default: Date.now,
-        required: true
+       
     },
     level: {
         type: String,
         enum: ['info', 'warning', 'error'],
         default: 'error',
-        required: true
+       
     },
     user: {
         type: String

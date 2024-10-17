@@ -6,7 +6,7 @@ import { UseFormRegister } from "react-hook-form";
 
 
 export type TOption = {
-    value: TSortOptions,
+    value: TSortOptions|string,
     label: string;
     id: string;
     disabled: boolean;
