@@ -52,10 +52,13 @@ const authOptions: AuthOptions = {
                 params: {
                     prompt: "consent",
                     access_type: "offline",
-                    response_type: "code"
-                }
-            }
-        })
+                    response_type: "code",
+
+                },
+
+            },
+        }
+        )
     ],
     callbacks: {
         async jwt({ token, user, account }) {
@@ -102,7 +105,24 @@ const authOptions: AuthOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
     session: {
-        strategy: "jwt"
+        strategy: "jwt",
+        maxAge: 30 * 24 * 60 * 60, // 30 días
+        updateAge: 24 * 60 * 60, // 24 horas
+        generateSessionToken: () => {
+            return require('crypto').randomBytes(32).toString('hex');
+        },
+
+    },
+    cookies: {
+        sessionToken: {
+            name: `__Secure-next-auth.session-token`,
+            options: {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production", // Solo en producción (HTTPS)
+                sameSite: "lax", // Evita problemas de CSRF
+                path: "/",
+            },
+        }
     },
     debug: process.env.NODE_ENV === 'development'
 }

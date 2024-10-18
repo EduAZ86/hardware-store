@@ -1,7 +1,9 @@
 import ErrorLogModel from "@/models/errors";
 import { ErrorLog } from "./errorLog.class";
+import connectDB from "@/lib/db/db";
 
 export const errorLogSave = async (error: any) => {
+    connectDB()
     let errorLogInstance;
 
     // Verifica si el error es una instancia de ErrorLog
@@ -13,7 +15,7 @@ export const errorLogSave = async (error: any) => {
             error.message,
             'error',
             'Unknown context',
-            undefined, 
+            undefined,
             'Unknown route'
         );
     }

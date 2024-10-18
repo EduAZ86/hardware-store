@@ -10,19 +10,19 @@ export async function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
-    if (!session) {
-        if (req.nextUrl.pathname.startsWith("/api")) {
-            return new NextResponse(
-                JSON.stringify({ message: "Authentication required" }),
-                { status: 401, headers: { "Content-Type": "application/json" } }
-            );
-        } else {
-            const url = req.nextUrl.clone();
-            url.pathname = "/auth/login";
-            url.search = `p=${req.nextUrl.pathname}`;
-            return NextResponse.redirect(url);
-        }
-    }
+    // if (!session) {
+    //     if (req.nextUrl.pathname.startsWith("/api")) {
+    //         return new NextResponse(
+    //             JSON.stringify({ message: "Authentication required" }),
+    //             { status: 401, headers: { "Content-Type": "application/json" } }
+    //         );
+    //     } else {
+    //         const url = req.nextUrl.clone();
+    //         url.pathname = "/auth/login";
+    //         url.search = `p=${req.nextUrl.pathname}`;
+    //         return NextResponse.redirect(url);
+    //     }
+    // }
 
     return NextResponse.next();
 }
