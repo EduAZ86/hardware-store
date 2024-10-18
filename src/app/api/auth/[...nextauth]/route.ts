@@ -118,8 +118,8 @@ const authOptions: AuthOptions = {
             name: `__Secure-next-auth.session-token`,
             options: {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === "production", // Solo en producción (HTTPS)
-                sameSite: "lax", // Evita problemas de CSRF
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "lax",
                 path: "/",
             },
         }
