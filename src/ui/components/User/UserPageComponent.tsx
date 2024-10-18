@@ -1,22 +1,22 @@
+"use client"
+import { Loader } from "../common";
 import { FC, useState } from "react";
-import { IUserPageComponentProps, optionButtonSelect } from "./types";
+import { signOut } from "next-auth/react";
+import { Toaster, toast } from "react-hot-toast";
+import { CartComponent } from "../Cart/CartComponent";
 import { useDataUser } from "@/hooks/user/useDataUser";
 import { ProfileCard } from "./ProfileCard/ProfileCard";
-import { Loader } from "../common";
-import { Toaster, toast } from "react-hot-toast";
 import { AcountDataForm } from "./AcountDataForm/AcountDataForm";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { CartComponent } from "../Cart/CartComponent";
+import { IUserPageComponentProps, optionButtonSelect } from "./types";
 import { OrdersSummaryViewer } from "./OrdersSummaryViewer/OrdersSummaryViewer";
 
 export const UserPageComponent: FC<IUserPageComponentProps> = ({
     userID
 }) => {
-    const router = useRouter()
     const {
         data: userData,
         isLoading,
+        isSuccess,
         error: errorDataUSer
     } = useDataUser().useGetUserByID(userID);
     const [currentOption, setCurrentOption] = useState<optionButtonSelect>("account")
@@ -31,6 +31,7 @@ export const UserPageComponent: FC<IUserPageComponentProps> = ({
             signOut({ callbackUrl: "/" })
         }
     }
+
     return (
         <div className={`
         w-full h-full 
@@ -44,7 +45,7 @@ export const UserPageComponent: FC<IUserPageComponentProps> = ({
                 <Loader />
                 :
                 <>
-                    {(userData)
+                    {(isSuccess)
                         ?
                         <div className={`
                                 w-full h-full                                

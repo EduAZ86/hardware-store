@@ -15,7 +15,14 @@ export const useDataUserCart = () => {
     const { cartData, setCartData, totalPrice } = useUserCartStore();
 
     const useGetCartUser = (userID: string) => {
-        const { data: cart, isSuccess, error, refetch, isLoading } = useQuery({
+        const {
+            data: cart,
+            isSuccess,
+            error,
+            refetch,
+            isLoading,
+            isError
+        } = useQuery({
             queryKey: ["userCart"],
             queryFn: () => getCartUser(userID, dataUserCartInstance)
         })
@@ -30,11 +37,13 @@ export const useDataUserCart = () => {
         }, [isSuccess, cart])
 
         return {
+            isSuccess,
             cartData,
             refetch,
             error,
             isLoading,
-            totalPrice
+            totalPrice,
+            isError
         }
     };
 

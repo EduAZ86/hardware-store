@@ -9,7 +9,13 @@ import { useRouter } from "next/navigation";
 export const CartComponent: FC<ICartProps> = ({
     userID
 }) => {
-    const { cartData, totalPrice, isLoading } = useDataUserCart().useGetCartUser(userID as string);
+    const {
+        cartData,
+        totalPrice,
+        isLoading,
+        isSuccess,
+        isError
+    } = useDataUserCart().useGetCartUser(userID as string);
     const { mutate: updatQuantityItem } = useDataUserCart().useUpdateProductsCart();
     const { mutate: deleteProduct } = useDataUserCart().useDeleteProductCart();
     const cartRouter = useRouter();
@@ -32,6 +38,7 @@ export const CartComponent: FC<ICartProps> = ({
     const handleContinueShopping = () => {
         cartRouter.push('/')
     }
+    console.log("cartData", cartData);
 
     return (
         <div
@@ -66,24 +73,27 @@ export const CartComponent: FC<ICartProps> = ({
                     ?
                     <Loader />
                     :
-                    <div className="w-full h-fit relative flex flex-col">
-                        <div className="py-2 gap-4 flex flex-col">
-                            {cartData && cartData?.items.map((item, index) => {
-                                return (
-                                    <CartCard
-                                        quantity={item.quantity}
-                                        increaseItem={increaseQuantityItem}
-                                        decreaseItem={decreaseQuantityItem}
-                                        removeItem={removeItem}
-                                        userID={cartData.userID}
-                                        key={index}
-                                        item={item}
-                                    />
-                                )
-                            })}
-                        </div>
-                        <div
-                            className={`
+                    <>
+                        {
+                            isSuccess &&
+                            <div className="w-full h-fit relative flex flex-col">
+                                <div className="py-2 gap-4 flex flex-col">
+                                    {cartData?.items?.map((item, index) => {
+                                        return (
+                                            <CartCard
+                                                key={index}
+                                                quantity={item.quantity}
+                                                increaseItem={increaseQuantityItem}
+                                                decreaseItem={decreaseQuantityItem}
+                                                removeItem={removeItem}
+                                                userID={cartData.userID}
+                                                item={item}
+                                            />
+                                        )
+                                    })}
+                                </div>
+                                <div
+                                    className={`
                             w-full h-fit relative 
                             grid 
                             md:grid-cols-5
@@ -91,13 +101,13 @@ export const CartComponent: FC<ICartProps> = ({
                             text-light-text dark:text-dark-text
                             text-lg font-semibold 
                             `}
-                        >
-                            <span key="product" className="col-span-3 hidden md:visible md:flex"></span>
-                            <div
-                                className=" w-full md:col-span-2  flex flex-col gap-4"
-                            >
-                                <div key="price"
-                                    className={`
+                                >
+                                    <span key="product" className="col-span-3 hidden md:visible md:flex"></span>
+                                    <div
+                                        className=" w-full md:col-span-2  flex flex-col gap-4"
+                                    >
+                                        <div key="price"
+                                            className={`
                                     col-span-2
                                     w-full h-20 
                                     display flex flex-row 
@@ -108,32 +118,34 @@ export const CartComponent: FC<ICartProps> = ({
                                     overflow-hidden p-1
                                     bg-light-acent dark:bg-dark-acent                                
                                     `}
-                                >
-                                    <span className="w-1/2">Total</span>
-                                    {totalPrice && <div className="w-fit">
-                                        <Price price={totalPrice} />
+                                        >
+                                            <span className="w-1/2">Total</span>
+                                            {totalPrice && <div className="w-fit">
+                                                <Price price={totalPrice} />
+                                            </div>
+                                            }
+                                        </div>
+                                        <div className="w-full flex flex-row justify-between gap-4">
+                                            <ButtonWithText
+                                                key="continue shopping"
+                                                onClick={handleContinueShopping}
+                                                buttonSize="full"
+                                                buttonVariant="transparent"
+                                                textButton="Continue shopping"
+                                            />
+                                            <ButtonWithText
+                                                key="checkout"
+                                                onClick={handleNexttoOrder}
+                                                buttonSize="full"
+                                                buttonVariant="backgroundColor"
+                                                textButton="Checkout"
+                                            />
+                                        </div>
                                     </div>
-                                    }
-                                </div>
-                                <div className="w-full flex flex-row justify-between gap-4">
-                                    <ButtonWithText
-                                        key="continue shopping"
-                                        onClick={handleContinueShopping}
-                                        buttonSize="full"
-                                        buttonVariant="transparent"
-                                        textButton="Continue shopping"
-                                    />
-                                    <ButtonWithText
-                                        key="checkout"
-                                        onClick={handleNexttoOrder}
-                                        buttonSize="full"
-                                        buttonVariant="backgroundColor"
-                                        textButton="Checkout"
-                                    />
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        }
+                    </>
                 }
             </div>
 

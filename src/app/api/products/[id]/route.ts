@@ -4,11 +4,10 @@ import { deleteProduct, getProductsByProductID, updateProduct } from "@/services
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
+    await connectDB();
     try {
-        await connectDB();
-        const productID = req.nextUrl.searchParams.get('id');
-        console.log(productID);
-
+        const url = new URL(req.url);
+        const productID = url.searchParams.get('id');
         if (!productID) {
             throw new Error('productID is required');
         }

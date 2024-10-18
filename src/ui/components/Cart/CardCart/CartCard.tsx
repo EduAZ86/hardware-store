@@ -12,8 +12,10 @@ export const CartCard: FC<ICartCardProps> = ({
     decreaseItem,
     removeItem
 }) => {
-    const { data: product } = useDataProducts().useGetProductById({ id: item.productID })
-    if (!product) {
+    const { data: product, isSuccess } = useDataProducts().useGetProductById({ id: item.productID })
+    console.log("product", product);
+
+    if (!isSuccess) {
         return <></>
     }
     return (
@@ -70,7 +72,7 @@ export const CartCard: FC<ICartCardProps> = ({
                         key={"increaseQuantity"}
                         icon={faPlus}
                         onClick={() => increaseItem({ productID: item.productID, quantity: item.quantity + 1 })}
-                        disabled={!(quantity < product.stock)}
+                        disabled={!(quantity < product?.stock)}
                     />
                 </div>
             </div>
