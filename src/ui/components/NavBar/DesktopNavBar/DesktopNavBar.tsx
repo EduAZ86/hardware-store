@@ -7,7 +7,8 @@ import { ButtonWithIcon } from "../ButtonWithIcon/ButtonWithIcon";
 import { Cart } from "../CartButton/CartButton";
 import { UserSession } from "../UserSession/UserSession";
 import { useSession } from "next-auth/react";
-import { faHeart, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faHome, faSignIn } from "@fortawesome/free-solid-svg-icons";
+import { IconButton } from "../../common";
 
 export const DesktopNavBar: FC<IDesktopNavBarProps> = ({
     children,
@@ -73,20 +74,32 @@ export const DesktopNavBar: FC<IDesktopNavBarProps> = ({
                         gap-4
                         `}
                     >
-                        {status === "authenticated" &&
+                        <div
+                            className={`flex flex-row-reverse gap-4 ${status === "unauthenticated" && "pr-2"} `}
+                        >
+                            {status === "authenticated" ?
+                                <ButtonWithIcon
+                                    key={"fav"}
+                                    icon={faHeart}
+                                    href={favoritesUrl}
+                                    text="Favorites"
+                                />
+                                :
+                                <ButtonWithIcon
+                                    key={"login"}
+                                    icon={faSignIn}
+                                    href={"/auth/login"}
+                                    text="Login"
+                                />
+
+                            }
                             <ButtonWithIcon
-                                key={"fav"}
-                                icon={faHeart}
-                                href={favoritesUrl}
-                                text="Favorites"
+                                key={"home"}
+                                icon={faHome}
+                                href={"/"}
+                                text="Home"
                             />
-                        }
-                        <ButtonWithIcon
-                            key={"home"}
-                            icon={faHome}
-                            href={"/"}
-                            text="Home"
-                        />
+                        </div>
                     </div>
                     {status === "authenticated" &&
                         <>
