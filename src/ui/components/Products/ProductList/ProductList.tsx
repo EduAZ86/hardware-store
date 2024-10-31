@@ -10,14 +10,16 @@ export const ProductList: FC<IListProductProps> = ({
             className={`
                 w-full h-fit
                 grid 
-                sm:grid-cols-1
+                grid-cols-2
                 md:grid-cols-3
                 lg:grid-cols-4
                 xl:grid-cols-5
                 2xl:grid-cols-6
                 items-center
                 justify-items-center                
-                gap-4 p-2
+                md:gap-4 gap-x-2 
+                bg-light-background dark:bg-dark-background
+                p-2
             `}
         >
             {products.map((product, index) => {

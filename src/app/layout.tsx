@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Footer, NavBar } from "@/ui";
+import { DesktopNavBar, Footer, MobileNavBar, NavBar } from "@/ui";
 import type { Metadata } from "next";
 import { Providers } from "./Providers";
 import { Montserrat } from "next/font/google";
@@ -21,9 +21,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.className}>
         <Providers>
-          <NavBar />
-          {children}
-          <Footer />
+          <DesktopNavBar>
+            {children}
+            <Footer />
+          </DesktopNavBar>
+          <MobileNavBar>
+            {children}
+            <Footer />
+          </MobileNavBar>
         </Providers>
       </body>
     </html>

@@ -16,9 +16,10 @@ export const IconButton: FC<IIconButtonProps> = ({
                 rounded-full
                 bg-light-primary dark:bg-dark-primary
                 hover:bg-light-secondary dark:hover:bg-dark-secondary
-                text-light-text dark:text-dark-text
-                ${!disabled &&  "active:scale-95" }
+                text-dark-text dark:text-dark-text
+                ${!disabled &&  "active:scale-[.98] active:shadow-inner" }
                 disabled:cursor-not-allowed
+                shadow-lg
                 `
             }
         >

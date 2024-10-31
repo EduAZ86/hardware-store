@@ -2,7 +2,6 @@ import { FC } from "react";
 import { IInputAuthProps } from "./types";
 
 export const InputAuth: FC<IInputAuthProps> = ({
-    label,
     name,
     disabled,
     register,
@@ -18,14 +17,6 @@ export const InputAuth: FC<IInputAuthProps> = ({
                 gap-1
             `}
         >
-            <label
-                className={`
-                  text-light-text dark:text-dark-text font-semibold
-                  text-sm  
-                `}
-            >
-                {label}
-            </label>
             <input
                 {...register(name,
                     {
@@ -34,13 +25,14 @@ export const InputAuth: FC<IInputAuthProps> = ({
                     })}
                 {...otherInputProps}
                 className={`
-                    w-full h-12 rounded-md
-                    dark:bg-dark-background bg-light-background
-                    dark:text-dark-acent text-light-acent
-                    px-3
+                    w-full h-12 rounded-l-full rounded-r-full
+                    dark:bg-dark-acent bg-light-acent
+                    text-light-text dark:text-dark-text
+                    px-5
                     focus:outline-none focus:ring-1
-                    text-xs
-                    focus:ring-light-secondary dark:focus:ring-dark-secondary
+                    text-base
+                    focus:ring-light-primary dark:focus:ring-dark-primary
+                    shadow-inner
                     `}
             />
             <span className="text-light-error text-xs dark:text-dark-error">{errors[name]?.message}</span>

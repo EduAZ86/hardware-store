@@ -19,17 +19,25 @@ export const ButtonWithText: FC<IButtonWithTextProps> = ({
             type={type}
             {...otherButtonProps}
             className={twJoin(
-                "w-fit h-fit flex flex-row justify-center items-center relative z-0 rounded-md overflow-hidden group active:scale-95",
+                `w-fit h-fit
+                 flex flex-row justify-center 
+                 items-center relative 
+                 z-0 rounded-xl overflow-hidden 
+                 group
+                 border-solid border-2 border-light-primary dark:border-dark-primary
+                 shadow-lg
+                 active:shadow-inner active:scale-[.99]
+                 `,
                 buttonSize === "small" && "py-1 px-2",
                 buttonSize === "middle" && " py-2 px-4 text-sm ",
                 buttonSize === "full" && "w-full py-3",
-                buttonVariant === "transparent" && "border-solid border-2 border-light-primary dark:border-dark-primary text-light-primary dark:text-dark-primary",
-                buttonVariant === "backgroundColor" && ` text-light-text dark:text-dark-text  group hover:text-light-primary dark:hover:text-dark-primary`
+                buttonVariant === "transparent" && "  text-light-primary dark:text-dark-primary group hover:font-bold",
+                buttonVariant === "backgroundColor" && ` text-light-background dark:text-light-background  group hover:brightness-110`,
             )}
         >
             <BackgroundColor
                 backgroundColor={buttonVariant === "backgroundColor" ? "primary" : "transparent"}
-                hoverBackgroundColor={"text"}
+                hoverBackgroundColor={buttonVariant === "backgroundColor" ? "primary" : "transparent"}
             />
             {loading
                 ?

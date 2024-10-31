@@ -13,11 +13,12 @@ export const InputSearch: FC<IInputSearchProps> = ({
             value={searchTerm}
             className={
                 `w-full h-full
-                 bg-light-background dark:bg-dark-background border-l-2 px-4
+                 bg-transparent
+                  px-4
                 border-none
-                rounded-l-lg
+                rounded-l-full
                 text-light-text dark:text-dark-text
-                focus:outline-none focus:ring-1 focus:ring-light-secondary dark:focus:ring-dark-secondary 
+                focus:outline-none 
                 `
             }
             placeholder="Search products"

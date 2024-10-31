@@ -35,7 +35,7 @@ const config: Config = {
           'primary': '#5082EE',
           'secondary': '#D46779',
           'background': '#FFFFFF',
-          'acent': '#C6C6C6',
+          'acent': '#F8F8F8',
           'text': '#0A0C0C',
           'error': '#F44336'
         },

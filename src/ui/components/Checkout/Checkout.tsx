@@ -43,20 +43,20 @@ export const CheckoutComponent: FC<ICheckoutProps> = ({
             router.back()
         }
     }
-    useEffect(() => {        
+    useEffect(() => {
         if (Object.keys(errors).length > 0) {
             toast.error("There are errors in the form")
         }
     }, [errors]);
     useEffect(() => {
         initMercadoPago(publicKey);
-    },[])
+    }, [])
 
     const handleConfirmation = async () => {
         const preference = await getPreferenceID(cartData?.items, userID as string, publicKey)
         console.log("preference", preference)
         if (preference) {
-            setPreferenceId(preference.id as string)           
+            setPreferenceId(preference.id as string)
         }
 
     }
@@ -68,7 +68,7 @@ export const CheckoutComponent: FC<ICheckoutProps> = ({
         if (showConfirmation) {
             postOrder(newOrder as IOrder, {
                 onSuccess: () => {
-                    toast.success("Order created successfully")                  
+                    toast.success("Order created successfully")
                 },
                 onError: () => {
                     toast.error("Error creating order")
@@ -263,10 +263,17 @@ export const CheckoutComponent: FC<ICheckoutProps> = ({
                                 </>
                                 :
                                 <Wallet
-                                    initialization={{ preferenceId, redirectMode: 'modal', marketplace:true }}
-                                    customization={{ texts: { valueProp: 'smart_option' } }}
-                                    
-                                />                                
+                                    initialization={{ preferenceId, redirectMode: 'modal', marketplace: true }}
+                                    customization={
+                                        {
+                                            visual: {
+
+                                            },
+                                            texts: { valueProp: 'security_safety' }
+                                        }}
+                                    brand="Hardware Store"
+                                    locale="es-AR"
+                                />
                             }
                         </div>
                     </div>

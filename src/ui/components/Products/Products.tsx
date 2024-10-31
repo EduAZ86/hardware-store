@@ -27,8 +27,7 @@ export const Products: FC<IProductsProps> = ({ }) => {
         : 0;
 
     return (
-        <div>
-            <Title text="Products" />
+        <div>           
             <CardControlPanel
                 setSortOption={setSortOption}
                 totalResults={dataProducts?.pages[0].totalResults || 0}

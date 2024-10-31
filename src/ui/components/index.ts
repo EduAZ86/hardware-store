@@ -7,3 +7,5 @@ export { CartComponent } from "./Cart/CartComponent";
 export { CheckoutComponent } from "./Checkout/Checkout";
 export { MercadopagoCheckoutPro } from "./Mercadopago/MercadopagoCheckoutPro";
 export { Footer } from "./Footer/Footer";
+export { MobileNavBar } from "./NavBar/MobileNavBar/MobileNavBar";
+export { DesktopNavBar } from "./NavBar/DesktopNavBar/DesktopNavBar";

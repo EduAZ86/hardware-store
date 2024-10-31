@@ -17,3 +17,19 @@ export interface ISingInProps {
 export interface ISingUpProps {
 
 }
+
+
+export interface IAuthContainerProps extends Pick<IAuthFormProps,
+    | "onSubmit"
+    | "children"
+> {
+    title: string;
+    name: string;
+    textButton: string;
+    linkButton: ISingProps ;
+    disableSocialSignIn?: boolean;
+}
+
+export interface IForgotPasswordProps {
+
+}

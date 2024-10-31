@@ -1,23 +1,27 @@
+"use client"
 import { FC } from "react"
 import { IFooterProps } from "./types"
 import Link from "next/link"
 import { IconSocial } from "./IconSocial"
 import { faChrome, faGoogle, faLinkedin, faXTwitter, faGithub, } from '@fortawesome/free-brands-svg-icons'
 import { BackgroundColor } from "../common"
+import { usePathname } from "next/navigation"
 
 export const Footer: FC<IFooterProps> = () => {
+    const currentUrl = usePathname();
     return (
         <footer className={`
-        w-full
-        flex flex-col justify-center items-center
+        w-full     
+        flex 
+        flex-col justify-center items-center
         gap-4 
-        relative 
-  
+        relative  
         py-6
+        ${currentUrl.split("/")[1] === "auth" && "hidden"} 
         `}>
-            <BackgroundColor 
-            backgroundColor="background" 
-            customClassName="brightness-75 opacity-25 dark:brightness-100 dark:opacity-25" 
+            <BackgroundColor
+                backgroundColor="background"
+                customClassName="brightness-75 opacity-25 dark:brightness-100 dark:opacity-25"
             />
             <div className={`
             container 

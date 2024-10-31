@@ -67,9 +67,12 @@ export const CardProduct: FC<ICardProductProps> = ({
     return (
         <div
             className={twJoin(
-                "w-56 h-96 flex flex-col relative z-0 px-3 py-2 rounded-md gap-2 overflow-hidden border-solid border-2 border-transparent",
-                "group hover:border-light-primary dark:hover:border-dark-primary",
-                "cursor-pointer active:scale-[99%] duration-300",              
+                "w-56  h-96  ",
+                "md:scale-100 scale-90",
+                "flex flex-col relative z-0 px-3 py-2 rounded-md gap-2 overflow-hidden border-solid border-2 border-transparent",
+                "group md:hover:border-light-primary md:dark:hover:border-dark-primary",
+                "cursor-pointer active:shadow-inner duration-300",
+                "shadow-sm"              
             )}
             onMouseEnter={handleFocus}
             onMouseLeave={handleBlur}

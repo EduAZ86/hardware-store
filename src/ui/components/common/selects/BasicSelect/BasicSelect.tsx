@@ -16,12 +16,13 @@ export const BasicSelect: FC<IBasicSelectProps> = ({
             className={`
                 md:w-fit w-full 
                 pl-2
-                md:h-10 h-8
-                md:rounded-l-lg rounded-none
+                md:h-8 h-8
+                rounded-lg 
                 cursor-pointer
                 bg-light-background dark:bg-dark-background
-                text-light-acent dark:text-dark-acent
-                focus:outline-none focus:ring-1 focus:ring-light-secondary dark:focus:ring-dark-secondary                
+                text-light-text dark:text-dark-text
+                shadow-lg
+                focus:outline-none focus:ring-1                
             `}
         >
             {placeholder && <option value="" >{placeholder}</option>}

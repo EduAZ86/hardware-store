@@ -1,15 +1,20 @@
-import { SingIn } from "@/ui/components/AuthForm/SingIn";
+
+import { AuthImg } from "@/ui/components/AuthComponents/AuthImg";
+import { SingIn } from "@/ui/components/AuthComponents/SingIn";
 import { BackgroundColor } from "@/ui/components/common";
 
 function Login() {
     return (
         <main
-            className="w-full h-[calc(100vh-88px)] relative flex-col z-0 py-3"
+            className="w-full min-h-screen h-full relative flex flex-row"
         >
             <BackgroundColor
                 backgroundColor="background"
             />
-            <SingIn />
+            <AuthImg />
+            <div className="w-full h-full flex  justify-end relative">
+                <SingIn />
+            </div>
         </main>
     )
 }

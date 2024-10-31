@@ -24,8 +24,10 @@ export const TypeCardButton: FC<ITypeCardButtonProps> = ({
                     border-[1px] border-solid
                     dark:hover:border-dark-primary hover:border-light-primary               
                     dark:hover:text-dark-primary hover:text-light-primary
+                    text-light-background dark:text-dark-background
+                    shadow-sm
                     `,
-                    isActive ? "border-light-primary dark:border-dark-primary" : " border-light-acent dark:border-dark-acent"
+                    isActive ? "border-light-primary dark:border-dark-primary" : " border-light-acent dark:border-dark-acent text-light-text dark:text-dark-text"
                 )
             }
         >

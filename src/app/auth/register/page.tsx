@@ -1,15 +1,20 @@
-import { SingUp } from "@/ui/components/AuthForm/SingUp";
+
+import { AuthImg } from "@/ui/components/AuthComponents/AuthImg";
+import { SingUp } from "@/ui/components/AuthComponents/SingUp";
 import { BackgroundColor } from "@/ui/components/common";
 
 function Register() {
     return (
         <main
-            className="w-full h-[calc(100vh-88px)] relative flex-col z-0 py-3"
+            className="w-full min-h-screen h-full relative flex flex-row"
         >
             <BackgroundColor
                 backgroundColor="background"
             />
-            <SingUp />
+            <AuthImg />
+            <div className="w-full h-full flex  justify-end relative">
+                <SingUp />
+            </div>
         </main>
     )
 }

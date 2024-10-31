@@ -10,10 +10,10 @@ export const AuthForm: FC<IAuthFormProps> = ({
             {...otherFormProps}
             className={`
             h-fit
-            md:w-1/3 w-5/6
+            w-full
              relative z-0                   
             flex flex-col
-            p-6 rounded-md overflow-hidden gap-5
+             gap-5
         `}
         >
             {children}

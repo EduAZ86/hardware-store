@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest) => {
     try {
         await connectDB()
-        const userID = await req.nextUrl.searchParams.get('id');
+        const userID = req.nextUrl.pathname.split('/').pop();
         if (!userID) {
             throw new Error('userID is required');
         }

@@ -7,18 +7,21 @@ export const SearchBar: FC<ISearchBarProps> = ({ }) => {
     return (
         <div
             className={`
-                w-2/3 
+                w-fr
                 h-10               
                 flex 
                 flex-row 
                 justify-center 
                 items-center
                 relative 
-                gap-0 md:gap-y-2              
+                gap-0
+                rounded-l-full rounded-r-full overflow-hidden
+                shadow-inner
+                bg-light-acent dark:bg-dark-acent              
             `}
         >
             <div
-                className="flex flex-row w-full h-8 md:h-10 rounded-lg overflow-hidden"
+                className="flex flex-row w-full h-full md:h-10"
             >
                 <InputSearch />
                 <ButtonClear />

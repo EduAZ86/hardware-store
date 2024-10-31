@@ -54,7 +54,7 @@ export const CardControlPanel: FC<ICardControlPanelProps> = ({
         <div
             className={`
                 w-full h-fit
-                py-3
+                pb-2
                 relative
                 z-0
                 flex 
@@ -62,7 +62,7 @@ export const CardControlPanel: FC<ICardControlPanelProps> = ({
                 flex-wrap
                 items-center
                 justify-around
-                border-solid border-b-[1px] border-light-primary dark:border-dark-primary
+                shadow-lg
             `}
         >
             <PaginationIndex

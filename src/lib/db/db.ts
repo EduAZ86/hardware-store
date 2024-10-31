@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-mongoose.set("strictQuery", false)
-
-const { MONGODB_URI } = process.env;
 
 const options = {
     useNewUrlParser: true,
@@ -11,6 +8,9 @@ const options = {
 };
 
 const connectDB = async () => {
+    mongoose.set('strictQuery', false);
+
+    const { MONGODB_URI } = process.env;
     try {
         const { connection } = await mongoose.connect(MONGODB_URI as string, options)
         if (connection.readyState === 1) {

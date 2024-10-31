@@ -1,7 +1,7 @@
 import UserModel from "@/models/user";
 import { credentials } from "./types";
 import bcCrypt from "bcryptjs"
-import { INewUser } from "@/types/user.types";
+import { INewUser, IUserResponse } from "@/types/user.types";
 import { loginSchema, registerSchema } from "./validation.schema";
 import { ErrorLog } from "../error/errorLog.class";
 import { UserToRegister } from "./userToRegister.class";
@@ -21,7 +21,7 @@ export const getUser = async (email: string) => {
     if (!user) {
         throw new ErrorLog("User not found", 'error', 'getUser', undefined, '/login');
     }
-    return {
+    const response: IUserResponse = {
         _id: user._id.toString(),
         username: user.username,
         email: user.email,
@@ -30,7 +30,8 @@ export const getUser = async (email: string) => {
         favoriteProducts: user.favoriteProducts,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt
-    };
+    }
+    return response
 }
 export const loginUser = async (credentials: credentials) => {
     //validation
@@ -44,7 +45,7 @@ export const loginUser = async (credentials: credentials) => {
     if (!isMatch) {
         throw new ErrorLog("Invalid password", 'error', 'loginUser', undefined, '/login');
     }
-    return {
+    const response: IUserResponse = {
         _id: user._id.toString(),
         username: user.username,
         email: user.email,
@@ -53,7 +54,8 @@ export const loginUser = async (credentials: credentials) => {
         favoriteProducts: user.favoriteProducts,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt
-    };
+    }
+    return response
 
 };
 export const registerUser = async (newUser: INewUser) => {
@@ -73,6 +75,7 @@ export const registerUser = async (newUser: INewUser) => {
     )
     const newUserToSave = new UserModel(newUserToRegister);
     const savedUser = await newUserToSave.save();
-    return savedUser
+    const response = await getUser(savedUser.email);
+    return response
 };
 

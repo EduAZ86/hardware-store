@@ -24,7 +24,7 @@ const authOptions: AuthOptions = {
                     if (!credentials) {
                         throw new ErrorLog("Credentials are required", 'error', 'authorize', undefined, '/login');
                     }
-                    const user = await loginUser(credentials)
+                    const user: IUserResponse = await loginUser(credentials)
                     if (!user) {
                         throw new ErrorLog("User not found", 'error', 'authorize', undefined, '/login');
                     }
@@ -48,21 +48,26 @@ const authOptions: AuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-            authorization: {
-                params: {
-                    prompt: "consent",
-                    access_type: "offline",
-                    response_type: "code",
-
-                },
-
-            },
         }
         )
     ],
     callbacks: {
-        async jwt({ token, user, account }) {
+        async signIn({ account, profile }) {
+            if (account && profile) {
+                return true
+            }
+            return false
+        },
+        async jwt({ token, user, account, isNewUser, profile }) {
             try {
+                console.log("-----------****** estoy en jwt *****------------");
+                console.log("token", token);
+                console.log("user", user);
+                console.log("account", account);
+                console.log("isNewUser", isNewUser);
+                console.log("profile", profile);
+
+
                 await connectDB();
                 if (user && user.email && user.name && user.image) {
                     let completeUser: IUserResponse;
@@ -79,25 +84,48 @@ const authOptions: AuthOptions = {
                         completeUser = await registerUser(newUser);
                     }
                     completeUser = await getUser(user.email);
+                    if (account) {
+                        token.accessToken = account.access_token
+                        token.id = profile?.sub
+                    }
                     token.user = {
                         ...user,
                         ...token,
                         userData: completeUser
                     };
-
                 }
+                console.log("token", token);
+                return token;
             } catch (error: any) {
                 console.log("error", error);
                 await errorLogSave(error);
+                return token;
             }
-            return token;
         },
-        async session({ session, token }) {
-            session.user = {
-                ...token.user as Omit<IUserSession, 'token'>,
-                token: token.jti as string,
-            };
-            return session
+        async session({ session, token, user }) {
+            console.log("-----------****** estoy en session *****------------");
+            try {
+                console.log("token dentro de session", token);
+                console.log("session dentro de session", session);
+                session.user.token = token.accessToken as string
+                session.user.id = token.id as string
+
+                if (token.user) {
+                    session.user = {
+                        ...token.user,
+                        token: token.jti as string,
+                        name: token.user.name as string,
+                        email: token.user.email as string,
+                        image: token.user.image as string
+                    }
+                };
+                console.log("session", session);
+                return session
+            } catch (error: any) {
+                console.log("error in session", error);
+                await errorLogSave(error);
+                return session;
+            }
         }
     }
     , pages: {
@@ -113,18 +141,20 @@ const authOptions: AuthOptions = {
         },
 
     },
-    cookies: {
+    //configura cookies para https en produccion y lo deshabilita en local que funciona en http
+    cookies: process.env.NODE_ENV === "production" ? {
         sessionToken: {
             name: `__Secure-next-auth.session-token`,
             options: {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
+                secure: true, 
                 sameSite: "lax",
                 path: "/",
             },
         }
-    },
+    } : undefined,
     debug: process.env.NODE_ENV === 'development'
+    ///////////////////////////////////////////
 }
 const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }

@@ -6,8 +6,11 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest) => {
     await connectDB();
     try {
-        const url = new URL(req.url);
-        const productID = url.searchParams.get('id');
+        const productID = req.nextUrl.pathname.split('/').pop();
+        console.log(" nextUrl ", req.nextUrl);
+
+        console.log(" productID ", productID);
+
         if (!productID) {
             throw new Error('productID is required');
         }

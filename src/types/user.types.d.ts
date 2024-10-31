@@ -26,11 +26,11 @@ export interface IUser {
     role: 'admin' | 'user';
     favoriteProducts?: string[];
     cartProducts?: ItemCart[];
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
-export interface IUserResponse extends Omit<IUser, "password"> {    
+export interface IUserResponse extends Omit<IUser, "password"> {
 }
 
 export interface User {

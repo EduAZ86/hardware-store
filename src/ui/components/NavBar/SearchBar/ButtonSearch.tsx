@@ -6,7 +6,7 @@ import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchStore } from "@/lib/store/search/useSearchStore";
 
-export const ButtonClear: FC<ISearchButtonProps> = ({   
+export const ButtonClear: FC<ISearchButtonProps> = ({
 }) => {
     const { clearTerm, searchTerm } = useSearchStore()
     const handleClear = () => {
@@ -20,21 +20,16 @@ export const ButtonClear: FC<ISearchButtonProps> = ({
                 group 
                 text-md justify-center
                  items-center 
-                 md:rounded-r-lg rounded-none                
-                active:scale-95 z-0 overflow-hidden duration-300
-                hover:text-light-primary dark:hover:text-dark-primary
+                rounded-r-full
+                bg-transparent             
+                active:scale-95 z-0 overflow-hidden duration-300               
+                hover:text-light-background dark:hover:text-dark-background
                 ${searchTerm === "" ? "hidden" : "visible"}
                 `
             }
             title="clear"
             onClick={handleClear}
-        >
-            <BackgroundColor
-                backgroundColor="background"
-                hoverBackgroundColor="text"
-               opacity="opacity-100"
-               hoverOpacity="opacity-100"
-            />
+        > 
             <FontAwesomeIcon
                 icon={faDeleteLeft}
             />

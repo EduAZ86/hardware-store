@@ -8,8 +8,7 @@ export interface IInputAuthProps extends Pick<InputHTMLAttributes<HTMLInputEleme
     | "placeholder"
     | "type"
 > {
-    register: UseFormRegister;
-    label: string;
+    register: UseFormRegister;   
     disabled: boolean;
     requiredMessage?: string;
     errors: FieldErrors<FieldValues>

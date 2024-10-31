@@ -36,16 +36,21 @@ const ThemeSwitcher: React.FC = () => {
         >
             <span
                 className={`
-            w-8 h-8 rounded-full                   
-            border-2 border-light-acent dark:border-dark-acent
-            cursor-pointer
-            flex flex-row justify-center items-center 
-            hover: duration-300 group-hover:border-light-primary dark:group-hover:border-dark-primary               
+                w-10 h-10 flex items-center justify-center
+                rounded-full
+                text-light-background dark:text-dark-background
+                hover:text-light-primary dark:hover:text-dark-primary
+                bg-light-primary dark:bg-dark-primary
+                hover:bg-light-background dark:hover:bg-dark-background
+                shadow-lg
+                hover:duration-300                
         `}
             >
                 {emogi && <FontAwesomeIcon
                     icon={emogi}
-                    className="text-md text-center text-light-text dark:text-dark-text"
+                    className={`
+                        text-md text-center                    
+                        `}
                 />}
             </span>
         </button>
