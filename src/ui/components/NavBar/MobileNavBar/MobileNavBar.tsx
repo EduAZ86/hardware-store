@@ -62,11 +62,11 @@ export const MobileNavBar: FC<IMobileNavBarProps> = ({
 
                 />
             </div>
-            <div
-                className=" w-full h-full overflow-y-scroll"
-            >
-                {children}
-            </div>
+                <div
+                    className="w-full h-full flex flex-col"
+                >
+                    {children}
+                </div>         
             {status === "authenticated" &&
                 <NavigationBar
                     userID={session.user.userData._id}
