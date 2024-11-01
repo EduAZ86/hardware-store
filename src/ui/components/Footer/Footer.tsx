@@ -38,7 +38,7 @@ export const Footer: FC<IFooterProps> = () => {
                     items-center
                     justify-between
                     `}>
-                    <h3 className=" text-lg font-semibold  text-light-text dark:text-dark-text ">Hardware Store</h3>
+                    <h3 className=" text-lg font-semibold  text-light-text dark:text-dark-text ">Hardware PC Store</h3>
                     <Link className={`
                         text-sm font-semibold  
                         text-light-text dark:text-dark-text 
@@ -80,7 +80,7 @@ export const Footer: FC<IFooterProps> = () => {
                 </div>
             </div>
             <div className="w-full flex flex-row justify-center">
-                <p className="text-sm text-light-text dark:text-dark-text">© 2024 Hardware Store. All Rights Reserved</p>
+                <p className="text-sm text-light-text dark:text-dark-text">© 2024 Hardware PC Store. All Rights Reserved</p>
             </div>
         </footer>
     )

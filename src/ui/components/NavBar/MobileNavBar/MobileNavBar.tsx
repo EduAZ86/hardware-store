@@ -63,7 +63,7 @@ export const MobileNavBar: FC<IMobileNavBarProps> = ({
                 />
             </div>
                 <div
-                    className="w-full h-full flex flex-col"
+                    className="w-full h-full flex flex-col overflow-y-scroll"
                 >
                     {children}
                 </div>         

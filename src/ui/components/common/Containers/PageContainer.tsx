@@ -4,7 +4,7 @@ import { IPageContainerProps } from "./types";
 export const PageContainer: FC<IPageContainerProps> = ({ children }) => {
     return <main
         className={`
-                w-full min-h-screen h-full
+                w-full h-full
                 flex flex-col 
                 relative     
                 z-0 py-3

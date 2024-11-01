@@ -8,7 +8,7 @@ import { Cart } from "../CartButton/CartButton";
 import { UserSession } from "../UserSession/UserSession";
 import { useSession } from "next-auth/react";
 import { faHeart, faHome, faSignIn } from "@fortawesome/free-solid-svg-icons";
-import { IconButton } from "../../common";
+
 
 export const DesktopNavBar: FC<IDesktopNavBarProps> = ({
     children,
