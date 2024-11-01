@@ -10,8 +10,9 @@ import { usePathname } from "next/navigation"
 export const Footer: FC<IFooterProps> = () => {
     const currentUrl = usePathname();
     return (
-        <footer className={`
-        w-full     
+        <div className={`
+        w-full
+        h-fit     
         flex 
         flex-col justify-center items-center
         gap-4 
@@ -82,6 +83,6 @@ export const Footer: FC<IFooterProps> = () => {
             <div className="w-full flex flex-row justify-center">
                 <p className="text-sm text-light-text dark:text-dark-text">© 2024 Hardware PC Store. All Rights Reserved</p>
             </div>
-        </footer>
+        </div>
     )
 }

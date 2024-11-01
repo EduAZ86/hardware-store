@@ -2,9 +2,9 @@ import { FC } from "react";
 import { IPageContainerProps } from "./types";
 
 export const PageContainer: FC<IPageContainerProps> = ({ children }) => {
-    return <main
+    return <div
         className={`
-                w-full h-full
+                w-full 
                 flex flex-col 
                 relative     
                 z-0 py-3
@@ -12,5 +12,5 @@ export const PageContainer: FC<IPageContainerProps> = ({ children }) => {
             `}
     >
         {children}
-    </main>;
+    </div>;
 }
